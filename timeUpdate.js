@@ -5,15 +5,15 @@ function timeUpdate(object) {
 
 function formatDate(date) {
   var monthNames = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
+    "Gennaio", "Febbraio", "Marzo",
+    "Aprile", "Maggio", "Giugno", "Luglio",
+    "Agosto", "Settembre", "Ottobre",
+    "Novembre", "Dicembre"
   ];
 
   var day = date.getDate();
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
 
-  return day + '/' + monthNames[monthIndex] + '/' + year;
+  return day + ' ' + monthNames[monthIndex] + ' ' + year;
 }

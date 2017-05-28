@@ -30,7 +30,7 @@
 	<body>
 	<font size ="6">
 		<p>Intanto che creo un sito decente beccati l'ora esatta: <br><br><span id='date'>Hey hey!</span> </p>
-		<p>Vabbuò adesso è pure giusta e si aggiorna, che belle cose</p>
+		<p>Vabbuò dai non facciamo i difficili, si aggiorna pure da sola</p>
 	</font>
 	<script>
 		setInterval("timeUpdate(document.getElementById('date'))", 1000)
