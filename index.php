@@ -36,6 +36,7 @@
 		<title>Eh vabbuò</title>
 		<script src='OSC.js'></script>
                 <script src='rainbow.js'></script>
+                <script src="mainButton.js"></script>
 	</head>
 		<body style="background-color: hsl(120, 100%, 35%);">
 
@@ -46,31 +47,7 @@
 	<script>
                 color = 120;
                 setInterval("rainbow(document.body, 100, 35)", 400);
-
-		r = 100;
-		ri = 70;
-
-		window.onload = window.onresize = function() {
- 			var canvas = document.getElementById('canvas');
-			canvas.width = window.innerWidth * 0.8;
-			canvas.height = window.innerHeight * 0.8;
-		};
-
-		canvas = O('mainButton');
-		context = canvas.getContext('2d');
-		context.fillStyle = 'DarkGreen';
-		canvas.addEventListener('click', function() {window.location.href = '/main.php'; }, false);
-
-		// This part could be done also using the with(context) statement
-		context.beginPath();
-		context.moveTo(r, r);
-		context.arc(r, r, r, 0, Math.PI * 2, false);
-		context.fill();
-		context.beginPath();
-		context.arc(r, r, ri, 0, Math.PI * 2, false);
-		context.fillStyle = 'green';
-		context.fill();
-		context.closePath();
+                drawButton();                
 	</script>
 	</body>
 </html>
