@@ -1,6 +1,6 @@
 function timeUpdate(object) {
-	var date = new Date()
-	object.innerHTML = date.toTimeString().substr(0, 8) + "   " + formatDate(date)
+	var date = new Date();
+	object.innerHTML = date.toTimeString().substr(0, 8) + "   " + formatDate(date);
 }
 
 function formatDate(date) {

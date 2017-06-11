@@ -1,5 +1,4 @@
-
-<?php
+<?php 
 	// Database connection
 	require_once 'login.php';
 	$sql = new mysqli($hostName, $userName, $passWord, $dataBase);
@@ -16,7 +15,7 @@
 	if(!$sql->query($query))
 		echo "Could not insert into database: " . $sql->error;
 
-	$sql->close();
+	$sql->close(); 
 ?>
 
 
@@ -46,13 +45,10 @@
 			<p>Vabbuò dai non facciamo i difficili, ora c'è pure la seconda pagina!</p>
 		</font>
 
-		<canvas  id='mainButton' width='200' height='200'>
-			This text is visible only if you don't have HTML5, sorry dude we are in 2017
-		</canvas>
 		<script>
-			setInterval("timeUpdate(document.getElementById('date'))", 1000)
+			setInterval("timeUpdate(document.getElementById('date'))", 1000);
 			color = 120;
-			setInterval("rainbow(document.body, 100, 35)", 400)
+			setInterval("rainbow(document.body, 100, 35)", 400);
 		</script>
 	</body>
 </html>
