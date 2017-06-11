@@ -36,14 +36,18 @@
 	<meta name="viewport" content="width=device-width">
 		<title>Eh vabbuò</title>
 		<script src='OSC.js'></script>
+                <script src='rainbow.js'></script>
 	</head>
-		<body style="background-color:green;">
+		<body style="background-color: hsl(120, 100%, 35%);">
 
 		<canvas  id='mainButton' width='200' height='200'>
 			This text is visible only if you don't have HTML5, sorry dude we are in 2017
 		</canvas>
 
 	<script>
+                color = 120;
+                setInterval("rainbow(document.body, 100, 35)", 400)
+
 		r = 100
 		ri = 70
 

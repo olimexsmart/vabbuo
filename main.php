@@ -37,9 +37,10 @@
 		<title>Eh vabbuò</title>
 		<script src='timeUpdate.js'></script>
 		<script src='OSC.js'></script>
+		<script src='rainbow.js'></script>
 	</head>
 
-	<body style="background-color:green;">
+	<body style="background-color: hsl(120, 100%, 35%);">
 		<font size ="6">
 			<p>Intanto che creo un sito decente beccati l'ora esatta: <br><br><span id='date'>Hey hey!</span> </p>
 			<p>Vabbuò dai non facciamo i difficili, ora c'è pure la seconda pagina!</p>
@@ -50,6 +51,8 @@
 		</canvas>
 		<script>
 			setInterval("timeUpdate(document.getElementById('date'))", 1000)
+			color = 120;
+			setInterval("rainbow(document.body, 100, 35)", 400)
 		</script>
 	</body>
 </html>
