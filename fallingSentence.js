@@ -1,33 +1,25 @@
+/*
+ * REference: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations
+ */
+
 class fallingSentence {
-    constructor (sentence, fontsize, speed, location, id) {
-        //this.sentence = sentence;
-        this.fontsise = fontsize;
-        this.speed = speed;
-        this.X = location;
-        this.Y = -fontsize;
+    constructor () {
+        // Add a canvas to the DOM
         
-        // Instanciating div element that will contain the text
-        this.div = document.createElement('div');
-        this.div.id = id;
-        S(this.div).position = "absolute";
-        S(this.div).left = this.X + "px";
-        S(this.div).top = this.Y + "px";
-        this.div.innerHTML = sentence;
-        // TODO div dimension coherent with text dimension
-        document.body.appendChild(this.div);
+        createNew();
+        window.requestAnimationFrame(draw);
     }
     
-    position() {
-        return new array (this.X, this.Y);
-    }
     
-    advance() {
-        this.X += speed;
+    draw() {        
         //update div position here
+        
+        //If position under the window size, createNew()
     }
     
-    dispose() {
-        // Delete div from DOM
+    createNew() {
+        // Get from database new sentence with Ajax
+        // Reload a new starting position, along with speed and size
     }
 }
 
