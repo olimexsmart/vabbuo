@@ -8,12 +8,12 @@ class fallingSentenceManager {
         this.ctx = canvas[0].getContext('2d');
         this.canvasWidth;
         this.canvasHeight;
-
+        this.getCanvasDimensions();
         for (var i = 0; i < howMany; i++) {
-            this.fS.push(new fallingSentence(canvas));
+            this.fS.push(new fallingSentence(canvas, this.canvasHeight, this.canvasWidth));
         }
 
-        this.interval = setInterval(this.drawAll.bind(this), 30);
+        this.interval = setInterval(this.drawAll.bind(this), 25);
     }
 
     drawAll() {

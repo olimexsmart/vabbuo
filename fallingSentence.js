@@ -3,11 +3,11 @@
  */
 
 class fallingSentence {
-    constructor (canvas) {
+    constructor (canvas, canvasH, canvasW) {
         //this.draw = this.draw.bind(this); // Pure magic to make work this.draw inside draw function itself        
         this.sentence;
-        this.canvasWidth;
-        this.canvasHeight;
+        this.canvasWidth = canvasW;
+        this.canvasHeight = canvasH;
         this.X = 150; 
         this.Y = 100;     // Hold upper left sentence position
         this.speed = 1;         // Speed of falling down
@@ -29,8 +29,8 @@ class fallingSentence {
         this.Y += this.speed;
 
         //If position under the window size, request a new sentence
-        if(this.size + this.Y > this.canvasHeight)
-            requestSentence();                        
+        if(this.Y - this.size > this.canvasHeight)
+            this.requestSentence();                        
     }
      /*
       * This is wrong: we need to request a sentence, wait for it, and then create a new sentence
@@ -59,6 +59,10 @@ class fallingSentence {
     createNew() {        
         // Get from database new sentence with Ajax
         console.log("Creating new: " + this.sentence);
+        this.X = Math.floor((Math.random() * this.canvasWidth));
+        this.size = Math.floor((Math.random() * 30) + 15);
+        this.Y = -this.size;
+        this.speed = Math.floor((Math.random() * 5) + 1);
         // Reload a new starting position, along with speed and size
     }
 }
