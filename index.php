@@ -46,6 +46,7 @@
 		<script src='OSC.js'></script>
 		<script src='utilities.js'></script>
                 <script src="fallingSentence.js"></script>
+		<script src="fallingSentenceManager.js"></script>
                 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 	</head>
 		<body style="background-color: hsl(120, 100%, 35%);">
@@ -59,13 +60,12 @@
                 color = 120;
                 setInterval("rainbow(document.body, 100, 35)", 400);
                 drawButton(O('mainButton')); 
-
-		
-		
+				
                 canvas = $("#c");
 		updateCanvasDimensions(canvas);
 		$(window).resize(updateCanvasDimensions(canvas));
-                fS = new fallingSentence(canvas);
+                //fS = new fallingSentence(canvas);
+		fSM = new fallingSentenceManager(canvas, 1);
                 
 		
 /*		canvas.attr({ height: $(window).height(), width: $(window).width() });
