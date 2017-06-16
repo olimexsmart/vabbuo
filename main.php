@@ -34,9 +34,8 @@
 	<head>
 	<meta name="viewport" content="width=device-width">
 		<title>Eh vabbuò</title>
-		<script src='timeUpdate.js'></script>
-		<script src='OSC.js'></script>
-		<script src='rainbow.js'></script>
+		<script src='utilities.js'></script>
+		<script src='OSC.js'></script>		
 	</head>
 
 	<body style="background-color: hsl(120, 100%, 35%);">
