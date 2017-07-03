@@ -65,7 +65,7 @@
 		updateCanvasDimensions(canvas);
 		$(window).resize(updateCanvasDimensions(canvas));
                 //fS = new fallingSentence(canvas);
-		fSM = new fallingSentenceManager(canvas, 1);
+		fSM = new fallingSentenceManager(canvas, 5);
                 
 		
 /*		canvas.attr({ height: $(window).height(), width: $(window).width() });

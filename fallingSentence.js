@@ -24,7 +24,7 @@ class fallingSentence {
         this.canvasWidth = canvasW;
         this.canvasHeight = canvasH;
         //update position here        
-        this.ctx.font = this.size + "px Arial";
+        this.ctx.font = this.size + "px Lucida Console";
         this.ctx.fillText(this.sentence, this.X, this.Y);
         this.Y += this.speed;
 
@@ -42,7 +42,7 @@ class fallingSentence {
             url : "sentence.php",
             method: "POST",
             dataType: "text",
-            data : {seed : Math.floor((Math.random() * 100000) + 1)}
+            data : {seed : Math.floor((Math.random() * 10000) + 1)}
         });
 
         self = this;
@@ -59,7 +59,8 @@ class fallingSentence {
     createNew() {        
         // Get from database new sentence with Ajax
         console.log("Creating new: " + this.sentence);
-        this.X = Math.floor((Math.random() * this.canvasWidth));
+        var a = this.ctx.measureText(this.sentence);
+        this.X = Math.floor((Math.random() * (this.canvasWidth - this.ctx.measureText(this.sentence).width)));
         this.size = Math.floor((Math.random() * 30) + 15);
         this.Y = -this.size;
         this.speed = Math.floor((Math.random() * 5) + 1);
