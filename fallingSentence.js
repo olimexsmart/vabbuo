@@ -23,8 +23,8 @@ class fallingSentence {
     draw(canvasH, canvasW) {        
         this.canvasWidth = canvasW;
         this.canvasHeight = canvasH;
-        //update position here        
-        this.ctx.font = this.size + "px Lucida Console";
+        //update position here          
+        this.ctx.font = this.size + "px Lucida Console";      
         this.ctx.fillText(this.sentence, this.X, this.Y);
         this.Y += this.speed;
 
@@ -37,7 +37,7 @@ class fallingSentence {
       */
     requestSentence() {
         // Get from database new sentence with Ajax
-        console.log("Request sent\n");
+        //console.log("Request sent\n");
         this.request = $.ajax({ 
             url : "sentence.php",
             method: "POST",
@@ -45,7 +45,7 @@ class fallingSentence {
             data : {seed : Math.floor((Math.random() * 10000) + 1)}
         });
 
-        self = this;
+        var self = this;
         this.request.done(function(response) {            
             self.sentence = response;            
             self.createNew();            
@@ -58,13 +58,21 @@ class fallingSentence {
     
     createNew() {        
         // Get from database new sentence with Ajax
-        console.log("Creating new: " + this.sentence);
-        var a = this.ctx.measureText(this.sentence);
-        this.X = Math.floor((Math.random() * (this.canvasWidth - this.ctx.measureText(this.sentence).width)));
-        this.size = Math.floor((Math.random() * 30) + 15);
+        //console.log("Creating new: " + this.sentence);                
+        this.size = Math.floor((Math.random() * 30) + 15);        
+        this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + "px Lucida Console"))));
         this.Y = -this.size;
         this.speed = Math.floor((Math.random() * 5) + 1);
         // Reload a new starting position, along with speed and size
+    }
+
+    getTextWidth(text, font) {
+        // re-use canvas object for better performance
+        var canvas = this.getTextWidth.canvas || (this.getTextWidth.canvas = document.createElement("canvas"));
+        var context = canvas.getContext("2d");
+        context.font = font;
+        var metrics = context.measureText(text);
+        return metrics.width;
     }
 }
 

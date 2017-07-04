@@ -13,7 +13,11 @@ class fallingSentenceManager {
             this.fS.push(new fallingSentence(canvas, this.canvasHeight, this.canvasWidth));
         }
 
-        this.interval = setInterval(this.drawAll.bind(this), 25);
+        var selfM = this;
+        setTimeout(function(){
+            //do what you need here
+            selfM.interval = setInterval(selfM.drawAll.bind(selfM), 50);
+        }, 2000);        
     }
 
     drawAll() {
