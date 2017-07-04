@@ -12,6 +12,7 @@ class fallingSentence {
         this.Y = 100;     // Hold upper left sentence position
         this.speed = 1;         // Speed of falling down
         this.size = 25;          // Font size in pixel
+        this.lenghtMax = 100;
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
@@ -25,7 +26,7 @@ class fallingSentence {
         this.canvasHeight = canvasH;
         //update position here          
         this.ctx.font = this.size + "px Lucida Console";      
-        this.ctx.fillText(this.sentence, this.X, this.Y);
+        this.ctx.fillText(this.sentence, this.X, Math.round(this.Y));
         this.Y += this.speed;
 
         //If position under the window size, request a new sentence
@@ -47,7 +48,7 @@ class fallingSentence {
 
         var self = this;
         this.request.done(function(response) {            
-            self.sentence = response;            
+            self.sentence = response.substring(0, self.lenghtMax);            
             self.createNew();            
         });
 
@@ -59,10 +60,10 @@ class fallingSentence {
     createNew() {        
         // Get from database new sentence with Ajax
         //console.log("Creating new: " + this.sentence);                
-        this.size = Math.floor((Math.random() * 30) + 15);        
+        this.size = Math.floor((Math.random() * (20 + this.sentence.length / 5)) + 10);        
         this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + "px Lucida Console"))));
-        this.Y = -this.size;
-        this.speed = Math.floor((Math.random() * 5) + 1);
+        this.Y = -2*this.size;
+        this.speed = (Math.random() * (5 - this.sentence.length / 20)) + 1;
         // Reload a new starting position, along with speed and size
     }
 
