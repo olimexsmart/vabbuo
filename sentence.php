@@ -4,6 +4,7 @@
 require_once 'login.php';
 $sql = new mysqli($hostName, $userName, $passWord, $dataBase);
 if ($sql->connect_error) { die($sql->connect_error); }
+$sql->query('SET NAMES utf8');
 
 // Getting seed from client
 $seed = isset($_POST['seed']) ? $_POST['seed'] : null;

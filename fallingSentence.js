@@ -3,12 +3,12 @@
  */
 
 class fallingSentence {
-    constructor (canvas, canvasH, canvasW) {
+    constructor(canvas, canvasH, canvasW) {
         //this.draw = this.draw.bind(this); // Pure magic to make work this.draw inside draw function itself        
         this.sentence;
         this.canvasWidth = canvasW;
         this.canvasHeight = canvasH;
-        this.X = 150; 
+        this.X = 150;
         this.Y = 100;     // Hold upper left sentence position
         this.speed = 1;         // Speed of falling down
         this.size = 25;          // Font size in pixel
@@ -18,52 +18,52 @@ class fallingSentence {
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
 
-        this.requestSentence();                
+        this.requestSentence();
     }
-    
-    
-    draw(canvasH, canvasW) {        
+
+
+    draw(canvasH, canvasW) {
         this.canvasWidth = canvasW;
         this.canvasHeight = canvasH;
         //update position here          
-        this.ctx.font = this.size + this.font;      
+        this.ctx.font = this.size + this.font;
         this.ctx.fillText(this.sentence, this.X, Math.round(this.Y));
         this.Y += this.speed;
 
         //If position under the window size, request a new sentence
-        if(this.Y - this.size > this.canvasHeight)
-            this.requestSentence();                        
+        if (this.Y - this.size > this.canvasHeight)
+            this.requestSentence();
     }
-     /*
-      * This is wrong: we need to request a sentence, wait for it, and then create a new sentence
-      */
+    /*
+     * This is wrong: we need to request a sentence, wait for it, and then create a new sentence
+     */
     requestSentence() {
         // Get from database new sentence with Ajax
         //console.log("Request sent\n");
-        this.request = $.ajax({ 
-            url : "sentence.php",
+        this.request = $.ajax({
+            url: "sentence.php",
             method: "POST",
             dataType: "text",
-            data : {seed : Math.floor((Math.random() * 10000) + 1)}
+            data: { seed: Math.floor((Math.random() * 10000) + 1) }
         });
 
         var self = this;
-        this.request.done(function(response) {            
-            self.sentence = response.substring(0, self.lenghtMax);            
-            self.createNew();            
+        this.request.done(function (response) {
+            self.sentence = response.substring(0, self.lenghtMax);
+            self.createNew();
         });
 
         /* Still don't know what to do here
         this.request.fail(function(jqxhr, status, error) {        
-        })*/        
+        })*/
     }
-    
-    createNew() {        
+
+    createNew() {
         // Get from database new sentence with Ajax
         //console.log("Creating new: " + this.sentence);                
-        this.size = Math.floor((Math.random() * (25 - this.sentence.length / 5)) + 10);        
+        this.size = Math.floor((Math.random() * (25 - this.sentence.length / 5)) + 10);
         this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
-        this.Y = -2*this.size;
+        this.Y = -2 * this.size;
         this.speed = (Math.random() * (5 - this.sentence.length / 20)) + 1;
         // Reload a new starting position, along with speed and size
     }
@@ -76,5 +76,6 @@ class fallingSentence {
         var metrics = context.measureText(text);
         return metrics.width;
     }
+
 }
 
