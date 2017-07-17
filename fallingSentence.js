@@ -12,7 +12,7 @@ class fallingSentence {
         this.Y = 100;     // Hold upper left sentence position
         this.speed = 1;         // Speed of falling down
         this.size = 25;          // Font size in pixel
-        this.lenghtMax = 100;
+        this.lenghtMax = 150;
         this.font = "px theconsolas";
 
         // Reading canvas context from jquey object
@@ -61,7 +61,7 @@ class fallingSentence {
     createNew() {        
         // Get from database new sentence with Ajax
         //console.log("Creating new: " + this.sentence);                
-        this.size = Math.floor((Math.random() * (20 + this.sentence.length / 5)) + 10);        
+        this.size = Math.floor((Math.random() * (25 - this.sentence.length / 5)) + 10);        
         this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
         this.Y = -2*this.size;
         this.speed = (Math.random() * (5 - this.sentence.length / 20)) + 1;

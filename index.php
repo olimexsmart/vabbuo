@@ -25,29 +25,30 @@ if (!$sql->query($query)) {
 
 <html>
     <style>
-    #mainButton {
-        position: absolute;
-        top:0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin:auto;
-        cursor: pointer;
-    }
-        * { margin: 0; padding: 0;}
+	#mainButton {
+		position: absolute;
+		top:0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin:auto;
+		cursor: pointer;
+	}
+	* { margin: 0; padding: 0;}
 
         body, html { height:100%; }
     /*canvas { display: block; }*/
-        #c {
-            position:absolute;
-            width:100%;
-            height:100%;
-        }
+	#c {
+	position:absolute;
+	width:100%;
+	height:100%;
+	}
 
-    @font-face {
-    font-family: "theconsolas";
-    src: url(Consolas.ttf) format("truetype");
-}
+	@font-face {
+	font-family: "theconsolas";
+	src: url(Consolas.ttf) format("truetype");
+	}
+	
     </style>
     <head>
     <meta name="viewport" content="width=device-width">
@@ -66,22 +67,15 @@ if (!$sql->query($query)) {
         </canvas>
 
     <script>
-                color = 120;
-                setInterval("rainbow(document.body, 100, 35)", 400);
-                drawButton(O('mainButton')); 
+        color = 120;
+        setInterval("rainbow(document.body, 100, 35)", 400);
+        drawButton(O('mainButton')); 
                 
-                canvas = $("#c");
+        canvas = $("#c");
         updateCanvasDimensions(canvas);
-        $(window).resize(updateCanvasDimensions(canvas));
-                //fS = new fallingSentence(canvas);
-        fSM = new fallingSentenceManager(canvas, 5);
-                
-        
-/*		canvas.attr({ height: $(window).height(), width: $(window).width() });
-        $(window).resize(function () { 
-            canvas.attr({ height: $(window).height(), width: $(window).width() });  
-        });*/
-
+	$(window).resize(updateCanvasDimensions(canvas));
+	                
+        fSM = new fallingSentenceManager(canvas, 8);
     </script>
     </body>
 </html>
