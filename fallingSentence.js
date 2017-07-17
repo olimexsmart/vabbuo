@@ -25,7 +25,7 @@ class fallingSentence {
         this.canvasWidth = canvasW;
         this.canvasHeight = canvasH;
         //update position here          
-        this.ctx.font = this.size + "px Lucida Console";      
+        this.ctx.font = this.size + "px theconsolas";      
         this.ctx.fillText(this.sentence, this.X, Math.round(this.Y));
         this.Y += this.speed;
 
