@@ -14,6 +14,7 @@ class fallingSentence {
         this.size = 25;          // Font size in pixel
         this.lenghtMax = 150;
         this.font = "px theconsolas";
+	this.requesting = false;
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
@@ -31,8 +32,10 @@ class fallingSentence {
         this.Y += this.speed;
 
         //If position under the window size, request a new sentence
-        if (this.Y - this.size > this.canvasHeight)
+        if (this.Y - this.size > this.canvasHeight && !this.requesting) {
             this.requestSentence();
+	    this.requesting = true;
+	}
     }
     /*
      * This is wrong: we need to request a sentence, wait for it, and then create a new sentence
@@ -51,6 +54,7 @@ class fallingSentence {
         this.request.done(function (response) {
             self.sentence = response.substring(0, self.lenghtMax);
             self.createNew();
+	    self.requesting = false;
         });
 
         /* Still don't know what to do here
