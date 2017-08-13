@@ -20,35 +20,15 @@
 
 
 
+<!DOCTYPE html>
 <html>
-	<style>
-	#mainButton {
-	    position: absolute;
-	    top:0;
-	    bottom: 0;
-	    left: 0;
-	    right: 0;
-	    margin:auto;
-	}
-	</style>
-	<head>
-	<meta name="viewport" content="width=device-width">
-		<title>Eh vabbuò</title>
-		<script src='utilities.js'></script>
-		<script src='OSC.js'></script>		
-	</head>
-
-	<body style="background-color: hsl(120, 100%, 35%);">
-		<font size ="6">
-			<p>Intanto che creo un sito decente beccati l'ora esatta: <br><br><span id='date'>Hey hey!</span> </p>
-			<p>Vabbuò dai non facciamo i difficili, ora c'è pure la seconda pagina!</p>
-		</font>
-
-		<script>
-			setInterval("timeUpdate(document.getElementById('date'))", 1000);
-			color = 120;
-			setInterval("rainbow(document.body, 100, 35)", 400);
-		</script>
+	<body>
+	<title>Eh Vabbuò</title>
+	<form action="/submitSentence.php">
+		Nickname:<br> <input type="text" name="firstname" value="Bomber"> <br>
+		Sentence:<br> <input type="text" name="lastname" value="Carpe Diem"> <br><br>
+				<input type="submit" value="Submit Sentence">
+	</form> <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
 	</body>
 </html>
 
