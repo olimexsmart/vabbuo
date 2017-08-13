@@ -22,13 +22,33 @@
 
 <!DOCTYPE html>
 <html>
-	<body>
-	<title>Eh Vabbuò</title>
-	<form action="/submitSentence.php">
-		Nickname:<br> <input type="text" name="firstname" value="Bomber"> <br>
-		Sentence:<br> <input type="text" name="lastname" value="Carpe Diem"> <br><br>
-				<input type="submit" value="Submit Sentence">
-	</form> <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+	<style>
+		@font-face {
+		font-family: "theconsolas";
+		src: url(Consolas.ttf) format("truetype");
+		}
+		/* Let's inherit to all DOM child the font */
+		body *{
+			font-family: 'theconsolas';
+		}
+    </style>
+    <meta name="viewport" content="width=device-width">
+        <title>Eh vabbuò</title>
+        <script src='OSC.js'></script>
+        <script src='utilities.js'></script>
+
+
+	<body style="background-color: hsl(120, 100%, 35%);">
+		<title>Eh Vabbuò</title>
+		<form action="/submitSentence.php" method="post">
+			Nickname:<br> <input type="text" name="nickname"> <br>
+			Sentence:<br> <textarea name="sentence" cols="40" rows="5"></textarea> <br><br>
+					<input type="submit" value="Submit Sentence">
+		
+		<script>
+			color = 120;
+			setInterval("rainbow(document.body, 100, 35)", 400);
+		</script>
 	</body>
 </html>
 

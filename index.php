@@ -55,9 +55,9 @@ if (!$sql->query($query)) {
         <title>Eh vabbuò</title>
         <script src='OSC.js'></script>
         <script src='utilities.js'></script>
-                <script src="fallingSentence.js"></script>
+        <script src="fallingSentence.js"></script>
         <script src="fallingSentenceManager.js"></script>
-                <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     </head>
         <body style="background-color: hsl(120, 100%, 35%);">
 
@@ -73,7 +73,7 @@ if (!$sql->query($query)) {
                 
         canvas = $("#c");
         updateCanvasDimensions(canvas);
-	$(window).resize(updateCanvasDimensions(canvas));
+	    $(window).resize(updateCanvasDimensions(canvas));
 	                
         fSM = new fallingSentenceManager(canvas, 8);
     </script>

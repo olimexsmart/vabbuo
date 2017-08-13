@@ -16,7 +16,7 @@ class fallingSentenceManager {
         var selfM = this;
         setTimeout(function(){
             //do what you need here
-            selfM.interval = setInterval(selfM.drawAll.bind(selfM), 40);
+            selfM.interval = setInterval(selfM.drawAll.bind(selfM), 50);
         }, 2000);        
     }
 
