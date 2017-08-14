@@ -9,6 +9,9 @@ $sql->query('SET NAMES utf8');
 
 // Getting seed from client
 $seed = isset($_POST['seed']) ? $_POST['seed'] : null;
+if (filter_var($seed, FILTER_VALIDATE_INT) === false) {
+    die("Invalid seed integer");
+} 
 
 // Getting how many sentences we have, id must be contiguos
 $count = "SELECT COUNT(1) FROM sentences";

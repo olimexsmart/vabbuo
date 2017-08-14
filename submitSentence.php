@@ -6,9 +6,11 @@ if ($sql->connect_error) { die($sql->connect_error); }
 // Solves accented chars handling
 $sql->query('SET NAMES utf8');
 
-// Getting seed from client
-$nickname = isset($_POST['nickname']) ? $_POST['nickname'] : null;
-$sentence = isset($_POST['sentence']) ? $_POST['sentence'] : null;
+// Getting seed from client sanitazing them
+$nickname = filter_var(isset($_POST['nickname']) ? $_POST['nickname'] : null, FILTER_SANITIZE_STRING);
+$sentence = filter_var(isset($_POST['sentence']) ? $_POST['sentence'] : null, FILTER_SANITIZE_STRING);
+
+// These come from the server, no need to sanitize
 $remote = ip2long($_SERVER['REMOTE_ADDR']);
 $remoteString = $_SERVER['REMOTE_ADDR'];
 
