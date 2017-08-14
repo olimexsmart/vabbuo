@@ -22,7 +22,7 @@ if (!$sql->query($query)) {
 ?>
 
 
-
+<!DOCTYPE html>
 <html>
     <style>
 	#mainButton {

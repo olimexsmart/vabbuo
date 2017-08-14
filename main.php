@@ -32,14 +32,14 @@
 			font-family: 'theconsolas';
 		}
     </style>
+	<head>
     <meta name="viewport" content="width=device-width">
         <title>Eh vabbuò</title>
         <script src='OSC.js'></script>
         <script src='utilities.js'></script>
 
-
-	<body style="background-color: hsl(120, 100%, 35%);">
-		<title>Eh Vabbuò</title>
+	</head>
+	<body style="background-color: hsl(120, 100%, 35%);">		
 		<form action="/submitSentence.php" method="post">
 			Nickname:<br> <input type="text" name="nickname"> <br>
 			Sentence:<br> <textarea name="sentence" cols="40" rows="5"></textarea> <br><br>
