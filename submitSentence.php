@@ -13,7 +13,7 @@ $nickname = filter_var(isset($_POST['nickname']) ? $_POST['nickname'] : null, FI
 $sentence = filter_var(isset($_POST['sentence']) ? $_POST['sentence'] : null, FILTER_SANITIZE_STRING);
 $email = filter_var(isset($_POST['email']) ? $_POST['email'] : null, FILTER_SANITIZE_STRING);
 $sex = filter_var(isset($_POST['sex']) ? $_POST['sex'] : null, FILTER_SANITIZE_STRING);
-$marpione = filter_var(isset($_POST['sentence']) ? true : null, FILTER_SANITIZE_STRING);
+$contact = filter_var(isset($_POST['sentence']) ? 1 : 0, FILTER_SANITIZE_STRING);
 
 // These come from the server, no need to sanitize
 $remote = ip2long($_SERVER['REMOTE_ADDR']);
