@@ -28,6 +28,8 @@ echo $result->fetch_row()[0]; // Sending senstence to client
 
 
 /*  STATISTICS */
+$sql->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+
 $query = "SELECT * FROM statistics ORDER BY no DESC LIMIT 1";   // Getting last row
 if (!$data = $sql->query($query)) { die("Error retreiving row statistics."); }
 $result = $data->fetch_row();
@@ -50,6 +52,8 @@ if($result != null) { // If table not empty
 } else {  // Else insert a row
     newRow($sql);
 }
+
+$sql->commit();
 
 $sql->close();
 
