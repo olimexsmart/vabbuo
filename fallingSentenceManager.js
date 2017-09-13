@@ -8,16 +8,17 @@ class fallingSentenceManager {
         this.ctx = canvas[0].getContext('2d');
         this.canvasWidth;
         this.canvasHeight;
+        
         this.getCanvasDimensions();
         for (var i = 0; i < howMany; i++) {
             this.fS.push(new fallingSentence(canvas, this.canvasHeight, this.canvasWidth));
         }
-
+        
         var selfM = this;
-        setTimeout(function(){
-            //do what you need here
-            selfM.interval = setInterval(selfM.drawAll.bind(selfM), 50);
-        }, 2000);        
+        setTimeout(function(){ // Used to wait a little for the AJAX responses
+            //do what you need here            
+            requestAnimationFrame(selfM.drawAll.bind(selfM));
+        }, 2000);  
     }
 
     drawAll() {
@@ -27,6 +28,8 @@ class fallingSentenceManager {
         for (var i = 0; i < this.fS.length; i++) {
             this.fS[i].draw(this.canvasHeight, this.canvasWidth);            
         }
+
+        requestAnimationFrame(this.drawAll.bind(this));
     }
 
     getCanvasDimensions() {

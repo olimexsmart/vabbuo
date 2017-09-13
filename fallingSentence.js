@@ -66,11 +66,11 @@ class fallingSentence {
         // Get from database new sentence with Ajax
         //console.log("Creating new: " + this.sentence);         
         // Smaller size as the lenght increases       
-        this.size = Math.floor((Math.random() * (25 - this.sentence.length / 5)) + 10);
+        this.size = Math.floor(250 / this.sentence.length + 10);
         this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
         this.Y = -2 * this.size;
         // Slower with longer sentences
-        this.speed = (Math.random() * (5 - this.sentence.length / 20)) + 1;
+        this.speed = (40 / this.sentence.length) + 0.5;
         // Reload a new starting position, along with speed and size
     }
 
