@@ -22,9 +22,9 @@ function updateCanvasDimensions(canvas) {
   canvas.attr({ height: $(window).height(), width: $(window).width() });  
 }
 
-function drawButton(canvas) {
-    r = 100;
-    ri = 70;     
+function drawButton(canvas, r, ri) {
+    // r = 100;
+    // ri = 70;     
     context = canvas.getContext('2d');
     context.fillStyle = 'DarkGreen';
     canvas.addEventListener('click', function() {window.location.href = '/main.php'; }, false);
