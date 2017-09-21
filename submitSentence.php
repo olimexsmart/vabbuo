@@ -28,4 +28,4 @@ if (!$sql->query($query)) {
 
 $sql->close();
 
-echo "Grazie, vorrei che non ti facesse cambiare pagina qui ma vabbuò";
+echo "OK";

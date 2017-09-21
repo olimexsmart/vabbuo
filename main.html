@@ -44,6 +44,7 @@
 <body style="background-color: hsl(120, 100%, 35%);">
     <div class="container">
         <div class="inner-container">
+            
             <form id="newsentence" method="post">
                 <!-- Text inputs -->
                 <div class="form-group row">
@@ -103,6 +104,26 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Come farei senza di te</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    Grazie caro!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Prego!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         color = 120;
         setInterval("rainbow(document.body, 100, 35)", 400);
@@ -117,7 +138,8 @@
                     dataType: "text",
                     data: $('#newsentence').serialize()
                 });
-                alert("Sent");
+                //alert("Sent");
+                $('#exampleModal').modal();
             });
         })
     </script>
