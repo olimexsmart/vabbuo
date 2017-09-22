@@ -3,7 +3,7 @@
  */
 
 class fallingSentence {
-    constructor(canvas, canvasH, canvasW) {
+    constructor(canvas, canvasH, canvasW, mobile) {
         //this.draw = this.draw.bind(this); // Pure magic to make work this.draw inside draw function itself        
         this.sentence;
         this.canvasWidth = canvasW;
@@ -15,6 +15,7 @@ class fallingSentence {
         this.lenghtMax = 150;
         this.font = "px theconsolas";
         this.requesting = false;
+        this.mobile = mobile;
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
@@ -24,10 +25,30 @@ class fallingSentence {
 
 
     draw() {
-
-        //update position here          
         this.ctx.font = this.size + this.font;
-        this.ctx.fillText(this.sentence, this.X, Math.round(this.Y));
+
+        //Splitting sentences in multiple lines
+        var splitted = this.sentence.split(' ');
+        var line = [];
+        var k = 0;
+        line[0] = splitted[0];
+        // 50 chars they say is helps readbility
+        for (var i = 1; i < splitted.length; i++) {
+            if (this.getTextWidth(line[k] + splitted[i], this.ctx.font) < (this.canvasWidth - 30) && line[k].length < 50) {
+                line[k] += " " + splitted[i];
+            } else {
+                k++;
+                line[k] = splitted[i];
+            }
+        }
+
+        //update position here   
+        var offeset = 0;     
+        for (var i = 0; i < line.length; i++) {
+            this.ctx.fillText(line[i], this.X, Math.round(this.Y + offeset));
+            offeset += Math.round(this.size + (this.size / 3));
+        }
+
         this.Y += this.speed;
 
         //If position under the window size, request a new sentence
@@ -66,7 +87,11 @@ class fallingSentence {
         //console.log("Creating new: " + this.sentence);         
         // Smaller size as the lenght increases       
         this.size = Math.floor(350 / this.sentence.length + 10);
-        this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
+        if(!this.mobile) {
+            this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
+        } else {
+            this.X = 10;
+        }
         this.Y = -2 * this.size;
         // Slower with longer sentences
         this.speed = (35 / this.sentence.length) + 0.5;

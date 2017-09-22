@@ -1,7 +1,7 @@
 
 
 class fallingSentenceManager {
-    constructor(canvas, howMany) {
+    constructor(canvas, howMany, mobile) {
         // Structure with all references to the fallingSentences
         this.fS = [];
         this.canvas = canvas;
@@ -11,7 +11,7 @@ class fallingSentenceManager {
         this.getCanvasDimensions();
         // Instanciate all the new objects
         for (var i = 0; i < howMany; i++) {
-            this.fS.push(new fallingSentence(canvas, this.canvasHeight, this.canvasWidth));
+            this.fS.push(new fallingSentence(canvas, this.canvasHeight, this.canvasWidth, mobile));
         }
         
         var selfM = this; // Hate this shit
