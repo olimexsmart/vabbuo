@@ -22,11 +22,11 @@ class fallingSentenceManager {
     }
 
     drawAll() {
-        this.getCanvasDimensions();
+        //this.getCanvasDimensions();
         this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight); // clear canvas
 
         for (var i = 0; i < this.fS.length; i++) {
-            this.fS[i].draw(this.canvasHeight, this.canvasWidth);            
+            this.fS[i].draw();            
         }
 
         requestAnimationFrame(this.drawAll.bind(this));

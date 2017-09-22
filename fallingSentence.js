@@ -23,9 +23,8 @@ class fallingSentence {
     }
 
 
-    draw(canvasH, canvasW) {
-        this.canvasWidth = canvasW;
-        this.canvasHeight = canvasH;
+    draw() {
+
         //update position here          
         this.ctx.font = this.size + this.font;
         this.ctx.fillText(this.sentence, this.X, Math.round(this.Y));
