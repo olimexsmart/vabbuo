@@ -4,7 +4,7 @@ require_once 'Mobile_Detect.php';
 $detect = new Mobile_Detect;
 
 // First load the page
-if ($detect->isMobile()) {
+if( $detect->isMobile() && !$detect->isTablet() ){
     echo file_get_contents("mobileStart.html");
 } else {
     echo file_get_contents("start.html");
