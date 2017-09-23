@@ -16,6 +16,7 @@ class fallingSentence {
         this.font = "px theconsolas";
         this.requesting = false;
         this.mobile = mobile;
+        this.color = Math.round(Math.random() * 360);
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
@@ -26,6 +27,9 @@ class fallingSentence {
 
     draw() {
         this.ctx.font = this.size + this.font;
+        var sat = 100;
+        var light = 60;
+        this.ctx.fillStyle = "hsl(" + this.color + "," + sat + "%," + light + "%)";
 
         //Splitting sentences in multiple lines
         var splitted = this.sentence.split(' ');
@@ -50,6 +54,8 @@ class fallingSentence {
         }
 
         this.Y += this.speed;
+        this.color++;
+        this.color %= 360;
 
         //If position under the window size, request a new sentence
         if (this.Y - this.size > this.canvasHeight && !this.requesting) {
