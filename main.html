@@ -52,6 +52,7 @@
                     <p class="card-text">Non sentirti in ansia, inserisci solo quello che vuoi. Puoi anche lasciare tutto vuoto e cliccare solo
                         per dirmi che sei passato. Non siamo dei tipi da vabbuò qui, mica dei precisini. </p>
                     <a href="http://vabbuo.it" class="btn btn-success">Torna a Vabbuò</a>
+                    <button class="btn btn-info" id="why">Si ma perché?</button>
                 </div>
             </div>
 
@@ -116,7 +117,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal thanks -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -131,6 +132,31 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">Prego!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="whyModal" tabindex="-1" role="dialog" aria-labelledby="whyModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="whyModalTitle">Cioè tipo fré</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    Insomma perché no? Alla fine che importanza ha? Vabbuò è uno spirito di vita dove non 
+                    ci si deve dare troppa importanza. Non ci siamo solo noi e nessuno è obbligare ogni nostro capriccio.
+                    Vabbuò perché non ci siamo solo noi ed essere pieni di sé stessi non ci condurrà ad una vita felice né a 
+                    noi né a quelli che abbiamo attorno. Ma questo attenzione non si confonda con l'indifferenza, noi siamo
+                    indifferenti agli altri, ma gli altri non devono essere indifferenti a noi. Semplicemente vabbuò accogliamo 
+                    ogni istante, con ogni felicità e rammarico perché esso porta, perché alla fine vabbuò dai non ha così importanza.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi va</button>                    
                 </div>
             </div>
         </div>
@@ -155,6 +181,10 @@
                 // Reset the sentence box
                 $('#sentence').val("");
             });
+
+            $('#why').click(function () {
+                $('#whyModal').modal();
+            })
         })
     </script>
 </body>
