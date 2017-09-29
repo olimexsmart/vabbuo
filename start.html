@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html>
-    <style>
-	#mainButton {
-		position: absolute;
-		top:0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		margin:auto;
-		cursor: pointer;
-	}
-	* { margin: 0; padding: 0;}
+<style>
+    #mainButton {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        cursor: pointer;
+    }
 
-        body, html { height:100%; }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body,
+    html {
+        height: 100%;
+    }
     /*canvas { display: block; }*/
-	#c {
-	position:absolute;
-	width:100%;
-	height:100%;
-	}
 
-	@font-face {
-	font-family: "theconsolas";
-	src: url(Consolas.ttf) format("truetype");
-	}
-	
-    </style>
-    <head>
+    #c {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    @font-face {
+        font-family: "theconsolas";
+        src: url(Consolas.ttf) format("truetype");
+    }
+</style>
+
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Eh vabbuò</title>
-        <script src='OSC.js'></script>
-        <script src='utilities.js'></script>
-        <script src="fallingSentence.js"></script>
-        <script src="fallingSentenceManager.js"></script>
-        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-    </head>
-        <body style="background-color: hsl(120, 55%, 30%);">
+    <title>Eh vabbuò</title>
+    <script src='OSC.js'></script>
+    <script src='utilities.js'></script>
+    <script src="fallingSentence.js"></script>
+    <script src="fallingSentenceManager.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
 
-                <canvas id="c"></canvas>
-        <canvas  id='mainButton' width='200' height='200'>
-            This text is visible only if you don't have HTML5, sorry dude we are in 2017
-        </canvas>
+<body style="background-color: hsl(120, 55%, 30%);">
+
+    <canvas id="c"></canvas>
+    <canvas id='mainButton' width='200' height='200'>
+        This text is visible only if you don't have HTML5, sorry dude we are in 2017
+    </canvas>
 
     <script>
         color = 120;
         setInterval("rainbow(document.body, 55, 30)", 400);
-        drawButton(O('mainButton'), 100, 70); 
-                
+        drawButton(O('mainButton'), 100, 70);
+
         canvas = $("#c");
         updateCanvasDimensions(canvas);
         //$(window).resize(updateCanvasDimensions(canvas));
-        $(window).resize(function(){location.reload();});
-	                
+        $(window).resize(function () { location.reload(); });
+
         fSM = new fallingSentenceManager(canvas, 8, false);
     </script>
-    </body>
+</body>
+
 </html>
