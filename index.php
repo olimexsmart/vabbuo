@@ -27,6 +27,7 @@ $userAgent = $headers['User-Agent'];
 
 $geolocate = json_decode(file_get_contents('http://freegeoip.net/json/' . $remoteString), true);
 $geolocation = $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city'];
+$geolocation = preg_replace("/\'/", "\'", $geolocation);
 
 $query = "INSERT INTO accessLog VALUES(NULL, '$remote', '$remoteString', '$geolocation', '$userAgent', NULL)";
 
