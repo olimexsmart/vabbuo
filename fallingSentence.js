@@ -17,6 +17,8 @@ class fallingSentence {
         this.requesting = false;
         this.mobile = mobile;
         this.color = Math.round(Math.random() * 360);
+        this.error = false;
+        this.lastRetry = 0;
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
@@ -46,21 +48,29 @@ class fallingSentence {
             }
         }
 
-        //update position here   
+        // Write each sentence line
         var offeset = 0;     
         for (var i = 0; i < line.length; i++) {
             this.ctx.fillText(line[i], this.X, Math.round(this.Y + offeset));
             offeset += Math.round(this.size + (this.size / 3));
         }
 
+        // Advance sentence fall 
         this.Y += this.speed;
         this.color++;
         this.color %= 360;
 
-        //If position under the window size, request a new sentence
+        // If position under the window size, request a new sentence
+        // Not if already requested
+        // If we had some error just wait a little bit before retring
         if (this.Y - this.size > this.canvasHeight && !this.requesting) {
-            this.requestSentence();
-            this.requesting = true;
+            if(!this.error) {   // Standard situation
+                this.requestSentence();
+                this.requesting = true;
+            } else if (this.error && this.lastRetry + 5000 < (new Date).getTime()) {
+                this.requestSentence();
+                this.requesting = true;
+            }                        
         }
     }
     /*
@@ -68,19 +78,27 @@ class fallingSentence {
      */
     requestSentence() {
         // Get from database new sentence with Ajax
-        //console.log("Request sent\n");
+        this.lastRetry = (new Date).getTime();
+        var self = this;
+
         this.request = $.ajax({
             url: "sentence.php",
             method: "POST",
             dataType: "text",
-            data: { seed: Math.floor((Math.random() * 10000) + 1) }
+            data: { seed: Math.floor((Math.random() * 10000) + 1) },
+            // Catch error disconnections
+            // Chrome error will come up anyway, but we keep the thing going
+            error: function( data ) { 
+                self.requesting = false;
+                self.error = true;
+              }
         });
-
-        var self = this;
+        
         this.request.done(function (response) {
             self.sentence = response.substring(0, self.lenghtMax);
             self.createNew();
             self.requesting = false;
+            self.error = false;
         });
 
         /* Still don't know what to do here
