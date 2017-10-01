@@ -1,27 +1,41 @@
 <?php
 
-    echo file_get_contents("main.html");
+echo file_get_contents("main.html");
 
-    // Database connection
-    require_once 'login.php';
-    $sql = new mysqli($hostName, $userName, $passWord, $dataBase);
-    if ($sql->connect_error) {
-        die($sql->connect_error);
-    }
+// Include and instantiate the class.
+require_once 'Mobile_Detect.php';
+$detect = new Mobile_Detect;
+$device = "";
+// Detect device
+if ($detect->isMobile() && !$detect->isTablet()) {    
+    $device = "mobile";
+} else {    
+    $device = "PC";
+}
+// Just check if tablet
+if ($detect->isTablet()) {
+    $device = "tablet";
+}
 
-    // Getting information
-    $remote = ip2long($_SERVER['REMOTE_ADDR']);
-    $remoteString = $_SERVER['REMOTE_ADDR'];
-    $headers = apache_request_headers();
-    $userAgent = $headers['User-Agent'];
+// Database connection
+require_once 'login.php';
+$sql = new mysqli($hostName, $userName, $passWord, $dataBase);
+if ($sql->connect_error) {
+    die($sql->connect_error);
+}
 
-    $geolocate = json_decode(file_get_contents('http://freegeoip.net/json/' . $remoteString), true);
-    $geolocation = $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city'];
+// Getting information
+$ip = $_SERVER['REMOTE_ADDR'];
+$headers = apache_request_headers();
+$userAgent = preg_replace("/\'/", "\'", $headers['User-Agent']);
 
-    $query = "INSERT INTO mainButton VALUES(NULL, '$remote', '$remoteString', '$geolocation', '$userAgent', NULL)";
+$geolocate = json_decode(file_get_contents('http://freegeoip.net/json/' . $ip), true);
+$geolocation = preg_replace("/\'/", "\'", $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city']);
 
-    if (!$sql->query($query)) {
-        echo "Could not insert into database: " . $sql->error;
-    }
+$query = "INSERT INTO mainButton VALUES(NULL, NULL, '$ip', '$device', '$geolocation', '$userAgent')";
 
-    $sql->close();
+if (!$sql->query($query)) {
+    echo "Could not insert into database: " . $sql->error;
+}
+
+$sql->close();

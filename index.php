@@ -2,15 +2,19 @@
 // Include and instantiate the class.
 require_once 'Mobile_Detect.php';
 $detect = new Mobile_Detect;
-
+$device = "";
 // First load the page
-if( $detect->isMobile() && !$detect->isTablet() ){
+if($detect->isMobile() && !$detect->isTablet()){
     echo file_get_contents("mobileStart.html");
+    $device = "mobile";
 } else {
     echo file_get_contents("start.html");
+    $device = "PC";
 }
-
-
+// Just check if tablet
+if($detect->isTablet()) {
+    $device = "tablet";
+}
 
 // Database connection
 require_once 'login.php';
@@ -20,16 +24,14 @@ if ($sql->connect_error) {
 }
 
 // Getting information
-$remote = ip2long($_SERVER['REMOTE_ADDR']);
-$remoteString = $_SERVER['REMOTE_ADDR'];
+$ip = $_SERVER['REMOTE_ADDR'];
 $headers = apache_request_headers();
-$userAgent = $headers['User-Agent'];
+$userAgent = preg_replace("/\'/", "\'", $headers['User-Agent']);
 
-$geolocate = json_decode(file_get_contents('http://freegeoip.net/json/' . $remoteString), true);
-$geolocation = $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city'];
-$geolocation = preg_replace("/\'/", "\'", $geolocation);
+$geolocate = json_decode(file_get_contents('http://freegeoip.net/json/' . $ip), true);
+$geolocation = preg_replace("/\'/", "\'",  $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city']);
 
-$query = "INSERT INTO accessLog VALUES(NULL, '$remote', '$remoteString', '$geolocation', '$userAgent', NULL)";
+$query = "INSERT INTO accessLog VALUES(NULL, NULL, '$ip', '$device', '$geolocation', '$userAgent')";
 
 if (!$sql->query($query)) {
     echo "Could not insert into database: " . $sql->error;
