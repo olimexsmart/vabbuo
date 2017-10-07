@@ -118,7 +118,7 @@ class fallingSentence {
         }
         this.Y = -2 * this.size;
         // Slower with longer sentences
-        this.speed = (35 / this.sentence.length) + 0.5;
+        this.speed = (30 / this.sentence.length) + 0.5;
         // Reload a new starting position, along with speed and size
     }
 
