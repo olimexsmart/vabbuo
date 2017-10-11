@@ -67,11 +67,6 @@
                         <input type="text" class="form-control" name="nickname" id="nickname" placeholder="Nickname" data-toggle="tooltip" data-placement="right"
                             title="Dimmi chi non sei">
                     </div>
-                    <label for="email" class="mt-2 col-sm-2 col-form-label">Email</label>
-                    <div class="mt-2 col-sm-10">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-toggle="tooltip" data-placement="right"
-                            title="Quella che usi per lo spam">
-                    </div>
                     <label for="sentence" class="mt-2 col-sm-2 col-form-label">Frase</label>
                     <div class="mt-2 col-sm-10">
                         <textarea type="text" class="form-control" name="sentence" id="sentence" placeholder="Scrivi o copia la tua frase qui" cols="40"
@@ -110,6 +105,12 @@
                         <div class="form-check" data-toggle="tooltip" data-placement="right" title='"Ehi come stai cit."'>
                             <label class="form-check-label"><input class="form-check-input" type="checkbox" name="marpione" id="marpione" value="marpione"> Scrivimi per sapere come sto</label>
                         </div>
+                    </div>
+
+                    <label for="email" class="mt-2 col-sm-2 col-form-label" id="emailLabel">Email</label>
+                    <div class="mt-2 col-sm-10" id="emailDiv">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-toggle="tooltip" data-placement="right"
+                            title="Quella che usi per lo spam">
                     </div>
 
                     <!-- <legend class="col-form-legend col-sm-2"></legend> -->
@@ -153,14 +154,12 @@
           </button>
                 </div>
                 <div class="modal-body">
-                    Insomma perché no? Alla fine che importanza ha? 
-                    Vabbuò è uno spirito di vita dove non ci si deve dare troppa importanza.
-                    Non ci siamo solo noi e nessuno è obbligato ad ascoltare ogni nostro capriccio. 
-                    Vabbuò perché non ci siamo solo noi ed essere pieni di noi stessi non ci condurrà 
-                    ad una vita felice.
-                    Ma questa attenzione non si confonda con l'indifferenza, noi siamo indifferenti agli altri, 
-                    ma gli altri non devono essere indifferenti a noi. Semplicemente accogliamo ogni istante, 
-                    con ogni felicità e rammarico che esso porta, perché alla fine vabbuò dai non ha così importanza.
+                    Insomma perché no? Alla fine che importanza ha? Vabbuò è uno spirito di vita dove non ci si deve dare troppa importanza.
+                    Non ci siamo solo noi e nessuno è obbligato ad ascoltare ogni nostro capriccio. Vabbuò perché non ci
+                    siamo solo noi ed essere pieni di noi stessi non ci condurrà ad una vita felice. Ma questa attenzione
+                    non si confonda con l'indifferenza, noi siamo indifferenti agli altri, ma gli altri non devono essere
+                    indifferenti a noi. Semplicemente accogliamo ogni istante, con ogni felicità e rammarico che esso porta,
+                    perché alla fine vabbuò dai non ha così importanza.
                 </div>
                 <div class="modal-footer">
                     <a href="http://olimexsmart.it" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Scopri tutta la storia, in inglese ma vabbuò">Olimexsmart</a>
@@ -177,6 +176,7 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
 
+
             $('#submit').click(function () {
                 $.ajax({
                     url: "submitSentence.php",
@@ -188,6 +188,19 @@
                 $('#thanks').modal();
                 // Reset the sentence box
                 $('#sentence').val("");
+            });
+
+            $('#emailDiv').hide();
+            $('#emailLabel').hide();
+            $('#marpione').click(function myFunction() {
+                if ( $('#marpione').is(':checked') ) {
+                    $('#emailDiv').show();
+                    $('#emailLabel').show();
+                } 
+                else {
+                    $('#emailDiv').hide();
+                    $('#emailLabel').hide();
+                }
             });
 
             $('#why').click(function () {
