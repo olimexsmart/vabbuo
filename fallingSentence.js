@@ -6,6 +6,7 @@ class fallingSentence {
     constructor(canvas, canvasH, canvasW, mobile) {
         //this.draw = this.draw.bind(this); // Pure magic to make work this.draw inside draw function itself        
         this.sentence;
+        this.author;
         this.canvasWidth = canvasW;
         this.canvasHeight = canvasH;
         this.X = 150;
@@ -40,6 +41,7 @@ class fallingSentence {
         line[0] = splitted[0];
         // 50 chars they say is helps readbility
         for (var i = 1; i < splitted.length; i++) {
+            // First condition for mobile second on desktop            
             if (this.getTextWidth(line[k] + splitted[i], this.ctx.font) < (this.canvasWidth - 30) && line[k].length < 50) {
                 line[k] += " " + splitted[i];
             } else {
@@ -47,9 +49,13 @@ class fallingSentence {
                 line[k] = splitted[i];
             }
         }
+        if (this.author != null) {
+            k++;
+            line[k] = "-" + this.author;
+        }
 
         // Write each sentence line
-        var offeset = 0;     
+        var offeset = 0;
         for (var i = 0; i < line.length; i++) {
             this.ctx.fillText(line[i], this.X, Math.round(this.Y + offeset));
             offeset += Math.round(this.size + (this.size / 3));
@@ -59,18 +65,20 @@ class fallingSentence {
         this.Y += this.speed;
         this.color++;
         this.color %= 360;
-
-        // If position under the window size, request a new sentence
-        // Not if already requested
-        // If we had some error just wait a little bit before retring
+        /*
+            If position under the window size, request a new sentence
+            Not if already requested
+            If we had some error just wait a little bit before retring,
+            This also manages disconnections
+        */
         if (this.Y - this.size > this.canvasHeight && !this.requesting) {
-            if(!this.error) {   // Standard situation
+            if (!this.error) {   // Standard situation
                 this.requestSentence();
                 this.requesting = true;
             } else if (this.error && this.lastRetry + 5000 < (new Date).getTime()) {
                 this.requestSentence();
                 this.requesting = true;
-            }                        
+            }
         }
     }
     /*
@@ -88,14 +96,21 @@ class fallingSentence {
             data: { seed: Math.floor((Math.random() * 10000) + 1) },
             // Catch error disconnections
             // Chrome error will come up anyway, but we keep the thing going
-            error: function( data ) { 
+            error: function (data) {
                 self.requesting = false;
                 self.error = true;
-              }
+            }
         });
-        
+
         this.request.done(function (response) {
-            self.sentence = response.substring(0, self.lenghtMax);
+            var decoded = JSON.parse(response);
+            self.sentence = decoded.sentence;
+            // Maybe we have the author or maybe not
+            if (typeof decoded.author != 'undefined')
+                self.author = decoded.author;
+            else
+                self.author = null;
+
             self.createNew();
             self.requesting = false;
             self.error = false;
@@ -111,15 +126,16 @@ class fallingSentence {
         //console.log("Creating new: " + this.sentence);         
         // Smaller size as the lenght increases       
         this.size = Math.floor(350 / this.sentence.length + 10);
-        if(!this.mobile) {
-            this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
-        } else {
+        if (this.mobile) {
             this.X = 10;
+            // Slower with longer sentences                
+            this.speed = (30 / this.sentence.length) + 0.5;
+        } else {
+            this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
+            // Slower with longer sentences                
+            this.speed = (10 / this.sentence.length) + 0.5;
         }
         this.Y = -2 * this.size;
-        // Slower with longer sentences
-        this.speed = (30 / this.sentence.length) + 0.5;
-        // Reload a new starting position, along with speed and size
     }
 
     getTextWidth(text, font) {

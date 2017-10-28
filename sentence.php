@@ -25,13 +25,24 @@ if (!$result = $sql->query($count)) {
 $nSentences = $result->fetch_row()[0];
 $key = ($seed % $nSentences) + 1;
 
-$query = "SELECT text from sentences where id = $key";
+$query = "SELECT text, author from sentences where id = $key";
 if (!$result = $sql->query($query)) {
     die("Error retreiving row sentence.");
 }
 
-// Remember there is no multiline support
-echo $result->fetch_row()[0]; // Sending senstence to client
+// Response depending we have an author or not
+$fetched = $result->fetch_row();
+if ($fetched[1] != null){
+    $response = array(
+        'sentence'  => $fetched[0],
+        'author'    => $fetched[1]
+    );
+} else {
+    $response = array(
+        'sentence'  => $fetched[0]        
+    );
+}
+echo json_encode($response); // Sending senstence to client
 
 
 /*  STATISTICS */
