@@ -20,6 +20,8 @@ class fallingSentence {
         this.color = Math.round(Math.random() * 360);
         this.error = false;
         this.lastRetry = 0;
+        this.endingY;
+        this.fading = 0;
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
@@ -32,7 +34,13 @@ class fallingSentence {
         this.ctx.font = this.size + this.font;
         var sat = 100;
         var light = 60;
-        this.ctx.fillStyle = "hsl(" + this.color + "," + sat + "%," + light + "%)";
+        // Fading in and out
+        if (this.fading < 1 && this.Y < this.endingY)
+            this.fading += 0.01;
+        else if (this.fading > 0)
+            this.fading -= 0.01;
+        // Color setting
+        this.ctx.fillStyle = "hsla(" + this.color + "," + sat + "%," + light + "%," + this.fading + ")";
 
         //Splitting sentences in multiple lines
         var splitted = this.sentence.split(' ');
@@ -129,13 +137,15 @@ class fallingSentence {
         if (this.mobile) {
             this.X = 10;
             // Slower with longer sentences                
-            this.speed = (30 / this.sentence.length) + 0.5;
+            this.speed = (25 / this.sentence.length) + Math.random() * 0.4 + 0.1;
         } else {
             this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
             // Slower with longer sentences                
-            this.speed = (10 / this.sentence.length) + 0.5;
+            this.speed = (15 / this.sentence.length) + Math.random() * 0.3 + 0.1;
         }
-        this.Y = -2 * this.size;
+        //this.Y = -2 * this.size;
+        this.Y = Math.floor(Math.random() * this.canvasHeight / 4); // Appear in first quarte of screen
+        this.endingY = Math.floor(Math.random() * this.canvasHeight / 4 + 3 * this.canvasHeight / 4); // Disappear in second half of screen
     }
 
     getTextWidth(text, font) {
