@@ -53,7 +53,8 @@
 
     <script>
         color = 120;
-        setInterval("rainbow(document.body, 55, 30)", 400);
+        lastColorUpdate = 0;
+        // setInterval("rainbow(document.body, 55, 30)", 400);
         drawButton(O('mainButton'), 100, 70);
 
         canvas = $("#c");
@@ -62,6 +63,11 @@
         $(window).resize(function () { location.reload(); });
 
         fSM = new fallingSentenceManager(canvas, 8, false);
+
+        setTimeout(function(){ // Used to wait a little for the AJAX responses
+            // Pure JavaScript this madness
+            requestAnimationFrame(animate);
+        }, 1750);  
     </script>
 </body>
 

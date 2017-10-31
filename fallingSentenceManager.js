@@ -12,13 +12,7 @@ class fallingSentenceManager {
         // Instanciate all the new objects
         for (var i = 0; i < howMany; i++) {
             this.fS.push(new fallingSentence(canvas, this.canvasHeight, this.canvasWidth, mobile));
-        }
-        
-        var selfM = this; // Hate this shit
-        setTimeout(function(){ // Used to wait a little for the AJAX responses
-            // Pure JavaScript this madness
-            requestAnimationFrame(selfM.drawAll.bind(selfM));
-        }, 1750);  
+        }        
     }
 
     drawAll() {
@@ -27,9 +21,7 @@ class fallingSentenceManager {
 
         for (var i = 0; i < this.fS.length; i++) {
             this.fS[i].draw();            
-        }
-
-        requestAnimationFrame(this.drawAll.bind(this));
+        }    
     }
 
     // Updates canvas dimensions if they changed

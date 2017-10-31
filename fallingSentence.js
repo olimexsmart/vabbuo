@@ -143,9 +143,9 @@ class fallingSentence {
             // Slower with longer sentences                
             this.speed = (15 / this.sentence.length) + Math.random() * 0.3 + 0.1;
         }
-        //this.Y = -2 * this.size;
+        //this.Y = -2 * this.size;  old stuff
         this.Y = Math.floor(Math.random() * this.canvasHeight / 4); // Appear in first quarte of screen
-        this.endingY = Math.floor(Math.random() * this.canvasHeight / 4 + 3 * this.canvasHeight / 4); // Disappear in second half of screen
+        this.endingY = Math.floor(Math.random() * this.canvasHeight / 4 + 3 * this.canvasHeight / 4); // Disappear in last quarter of screen
     }
 
     getTextWidth(text, font) {
