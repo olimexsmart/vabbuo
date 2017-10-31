@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <style>
-    #mainButton {
+    /* #mainButton {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -9,7 +9,7 @@
         right: 0;
         margin: auto;
         cursor: pointer;
-    }
+    } */
 
     * {
         margin: 0;
@@ -47,25 +47,23 @@
 <body style="background-color: hsl(120, 55%, 30%);">
 
     <canvas id="c"></canvas>
-    <canvas id='mainButton' width='200' height='200'>
+    <!-- <canvas id='mainButton' width='200' height='200'>
         This text is visible only if you don't have HTML5, sorry dude we are in 2017
-    </canvas>
+    </canvas> -->
 
     <script>
+        // Global vars
         color = 120;
-        lastColorUpdate = 0;
-        // setInterval("rainbow(document.body, 55, 30)", 400);
-        drawButton(O('mainButton'), 100, 70);
-
+        lastColorUpdate = 0;                
         canvas = $("#c");
+
         updateCanvasDimensions(canvas);
         //$(window).resize(updateCanvasDimensions(canvas));
         $(window).resize(function () { location.reload(); });
 
         fSM = new fallingSentenceManager(canvas, 8, false);
 
-        setTimeout(function(){ // Used to wait a little for the AJAX responses
-            // Pure JavaScript this madness
+        setTimeout(function(){ // Used to wait a little for the AJAX responses            
             requestAnimationFrame(animate);
         }, 1750);  
     </script>
