@@ -26,7 +26,7 @@ function updateCanvasDimensions(canvas) {
 
 function drawButton(canvas, height, width) {
   r = 100;
-  ri = 70;     
+  ri = 70;
   context = canvas.getContext('2d');
   context.fillStyle = 'DarkGreen';
   canvas.addEventListener('click', function () { window.location.href = '/main.php'; }, false);
@@ -49,18 +49,25 @@ function rainbow(o, sat, light) {
   color %= 360;
 }
 
+function svgButton (sat, light) {
+  S('inner').fill = "hsl(" + colorInner + "," + sat + "%," + light + "%)";
+  S('outer').fill = "hsl(" + colorOuter + "," + sat + "%," + light + "%)";
+  colorInner++;
+  colorOuter++;
+}
+
 // The timestamp parameter is passed automatically, holds the time passed from the loading of the page
 // in milliseconds and decimals
 function animate(timestamp) {
 
-  if (timestamp > lastColorUpdate + 400) {
-    rainbow(document.body, 55, 30); // Background color updating
-    lastColorUpdate = timestamp;
-  }
-
   fSM.drawAll(); // Sentence updating
 
-  drawButton(O('c'), fSM.canvasHeight, fSM.canvasWidth); // Draw button as last thing
+  if (timestamp > lastColorUpdate + 400) {
+    rainbow(document.body, 55, 30); // Background color updating    
+    svgButton(55, 60);
+    //drawButton(O('c'), fSM.canvasHeight, fSM.canvasWidth); // Draw button as last thing    
+    lastColorUpdate = timestamp;
+  }
 
   requestAnimationFrame(animate) // call requestAnimationFrame again to animate next frame  
 }
