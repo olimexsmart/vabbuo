@@ -43,17 +43,19 @@ function drawButton(canvas, height, width) {
   context.closePath();
 }
 
-function rainbow(o, sat, light) {
-  S(o).backgroundColor = "hsl(" + color + "," + sat + "%," + light + "%)";
+function rainbow() {
+  S(document.body).backgroundColor = "hsl(" + color + ", 55%, 30%)";
   color++;
   color %= 360;
 }
 
-function svgButton (sat, light) {
-  S('inner').fill = "hsl(" + colorInner + "," + sat + "%," + light + "%)";
-  S('outer').fill = "hsl(" + colorOuter + "," + sat + "%," + light + "%)";
+function svgButton () {
+  S('inner').fill = "hsl(" + colorInner + ", 55%, 50%)";
+  S('outer').fill = "hsl(" + colorOuter + ", 55%, 20%)";
   colorInner++;
-  colorOuter++;
+  colorInner %= 360;
+  colorOuter--;
+  colorOuter %= 360;
 }
 
 // The timestamp parameter is passed automatically, holds the time passed from the loading of the page
@@ -63,8 +65,8 @@ function animate(timestamp) {
   fSM.drawAll(); // Sentence updating
 
   if (timestamp > lastColorUpdate + 400) {
-    rainbow(document.body, 55, 30); // Background color updating    
-    svgButton(55, 60);
+    rainbow(); // Background color updating    
+    svgButton();
     //drawButton(O('c'), fSM.canvasHeight, fSM.canvasWidth); // Draw button as last thing    
     lastColorUpdate = timestamp;
   }

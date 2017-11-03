@@ -30,6 +30,7 @@
     html {
         height: 100%;
     }
+
     /*canvas { display: block; }*/
 
     #c {
@@ -54,7 +55,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<body style="background-color: hsl(120, 55%, 30%);">
+<!-- <body style="background-color: hsl(120, 55%, 30%);"> -->
+
+<body>
 
     <canvas id="c"></canvas>
     <!-- <canvas id='mainButton' width='200' height='200'>
@@ -62,28 +65,30 @@
     </canvas> -->
     <svg width="100" height="100" id="svgButton">
         <a xlink:href="/main.php">
-        <circle cx="50" cy="50" r="40" fill="yellow" id="outer"></circle>
-        <circle cx="50" cy="50" r="30" fill="green" id="inner"></circle>
-        </a>        
+            <circle cx="50" cy="50" r="40" fill="yellow" id="outer"></circle>
+            <circle cx="50" cy="50" r="30" fill="green" id="inner"></circle>
+        </a>
     </svg>
 
     <script>
         // Global vars
-        color =  Math.random() * 360;
-        colorInner = Math.random() * 360;
-        colorOuter = Math.random() * 360;
-        lastColorUpdate = 0;                
+        color = Math.floor(Math.random() * 360);
+        colorInner = Math.floor(Math.random() * 360);
+        colorOuter = Math.floor(Math.random() * 360);
+        lastColorUpdate = 400;
         canvas = $("#c");
-
-        updateCanvasDimensions(canvas);
-        //$(window).resize(updateCanvasDimensions(canvas));
-        $(window).resize(function () { location.reload(); });
-
+        // Fast color apply
+        rainbow(); 
+        svgButton();
+        // Strech canvas to the whole page
+        updateCanvasDimensions(canvas);        
+        $(window).resize(function () { location.reload(); });        
+        // Instanciating all objects
         fSM = new fallingSentenceManager(canvas, 8, false);
-
-        setTimeout(function(){ // Used to wait a little for the AJAX responses            
+        // Begin animation 
+        setTimeout(function () { // Used to wait a little for the AJAX responses            
             requestAnimationFrame(animate);
-        }, 1750);  
+        }, 2000);  
     </script>
 </body>
 
