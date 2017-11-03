@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <style>
-    #mainButton {
+    #svgButton {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -55,9 +55,15 @@
 <body style="background-color: hsl(120, 55%, 30%);">
 
     <canvas id="c"></canvas>
-    <canvas id='mainButton' width='100' height='100'>
+    <!-- <canvas id='mainButton' width='200' height='200'>
         This text is visible only if you don't have HTML5, sorry dude we are in 2017
-    </canvas>
+    </canvas> -->
+    <svg width="100" height="100" id="svgButton">
+        <a xlink:href="/main.php">
+            <circle cx="50" cy="50" r="40" fill="yellow" id="outer"></circle>
+            <circle cx="50" cy="50" r="30" fill="green" id="inner"></circle>
+        </a>
+    </svg>
 
     <!-- Modal thanks -->
     <div class="modal fade" id="advice" tabindex="-1" role="dialog" aria-labelledby="adviceLabel" aria-hidden="true">
@@ -81,17 +87,30 @@
     </div>
 
     <script>
+        // Show modal on startup
         $(function () { $('#advice').modal(); });
-        color = 120;
-        setInterval("rainbow(document.body, 55, 30)", 400);
-        drawButton(O('mainButton'), 50, 35);
-
+        
+        // Global vars
+        color = Math.floor(Math.random() * 360);
+        colorInner = Math.floor(Math.random() * 360);
+        colorOuter = Math.floor(Math.random() * 360);
+        lastColorUpdate = 400;
         canvas = $("#c");
-        updateCanvasDimensions(canvas);
-        //$(window).resize(updateCanvasDimensions(canvas));
-        $(window).resize(function () { location.reload(); });
-
-        fSM = new fallingSentenceManager(canvas, 3, true);
+        // Fast color apply
+        rainbow(); 
+        svgButton();
+        // Strech canvas to the whole page
+        updateCanvasDimensions(canvas);      
+        // Reload on page resized  
+        $(window).resize(function () { location.reload(); });        
+        // Instanciating all objects
+        fSM = new fallingSentenceManager(canvas, 4, true);
+        // Update button dimensions
+        buttonDimensions(fSM.canvasHeight);
+        // Begin animation 
+        setTimeout(function () { // Used to wait a little for the AJAX responses            
+            requestAnimationFrame(animate);
+        }, 2000);  
     </script>
 </body>
 
