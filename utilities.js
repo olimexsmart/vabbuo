@@ -58,6 +58,20 @@ function svgButton () {
   colorOuter %= 360;
 }
 
+function buttonDimensions (height) {
+  radius = Math.floor(height / 14); // Bomber Lino
+  S('svgButton').height = radius * 2;
+  S('svgButton').width = radius * 2;
+  
+  S('inner').cx = radius;
+  S('inner').cy = radius;
+  S('inner').r = radius - radius * 0.25;
+  
+  S('outer').cx = radius;
+  S('outer').cy = radius;
+  S('outer').r = radius;
+
+}
 // The timestamp parameter is passed automatically, holds the time passed from the loading of the page
 // in milliseconds and decimals
 function animate(timestamp) {
