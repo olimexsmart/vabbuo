@@ -3,7 +3,7 @@
  */
 
 class fallingSentence {
-    constructor(canvas, mobile) {        
+    constructor(canvas, mobile) {
         this.sentence;
         this.author;
         this.canvasWidth = canvas.width();
@@ -23,6 +23,7 @@ class fallingSentence {
         this.fading = 0;
         this.sat = 100;
         this.light = 60;
+        this.line;
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
@@ -41,30 +42,10 @@ class fallingSentence {
         // Color setting
         this.ctx.fillStyle = "hsla(" + this.color + "," + this.sat + "%," + this.light + "%," + this.fading + ")";
 
-        //Splitting sentences in multiple lines
-        var splitted = this.sentence.split(' ');
-        var line = [];
-        var k = 0;
-        line[0] = splitted[0];
-        // 50 chars they say is helps readbility
-        for (var i = 1; i < splitted.length; i++) {
-            // First condition for mobile second on desktop            
-            if (this.getTextWidth(line[k] + splitted[i], this.ctx.font) < (this.canvasWidth - 30) && line[k].length < 50) {
-                line[k] += " " + splitted[i];
-            } else {
-                k++;
-                line[k] = splitted[i];
-            }
-        }
-        if (this.author != null) {
-            k++;
-            line[k] = "-" + this.author;
-        }
-
         // Write each sentence line
         var offeset = 0;
-        for (var i = 0; i < line.length; i++) {
-            this.ctx.fillText(line[i], this.X, Math.round(this.Y + offeset));
+        for (var i = 0; i < this.line.length; i++) {
+            this.ctx.fillText(this.line[i], this.X, Math.round(this.Y + offeset));
             offeset += Math.round(this.size + (this.size / 3));
         }
 
@@ -88,7 +69,7 @@ class fallingSentence {
             }
         }
     }
-    
+
     // Request a new sentence from server
     requestSentence() {
         // Get from database new sentence with Ajax
@@ -124,7 +105,7 @@ class fallingSentence {
     }
 
     // Compute all the parameters from the sentence we just got
-    createNew() {                
+    createNew() {
         // Smaller size as the lenght increases       
         this.size = Math.floor(350 / this.sentence.length + 10);
         // Speed depends on the device, slower on pc
@@ -135,9 +116,29 @@ class fallingSentence {
         } else {
             this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
             // Slower with longer sentences                
-            this.speed = (14 / this.sentence.length) + Math.random() * 0.4;
+            this.speed = (10 / this.sentence.length) + Math.random() * 0.4 + 0.1;
         }
-        
+
+        // Splitting sentence in multiple lines
+        var splitted = this.sentence.split(' ');
+        this.line = [];
+        var k = 0;
+        this.line[0] = splitted[0];
+        // 50 chars they say is helps readbility
+        for (var i = 1; i < splitted.length; i++) {
+            // First condition for mobile second on desktop            
+            if (this.getTextWidth(this.line[k] + splitted[i], this.ctx.font) < (this.canvasWidth - 30) && this.line[k].length < 50) {
+                this.line[k] += " " + splitted[i];
+            } else {
+                k++;
+                this.line[k] = splitted[i];
+            }
+        }
+        if (this.author != null) {
+            k++;
+            this.line[k] = "-" + this.author;
+        }
+
         // Vertical (Y) position
         this.Y = Math.floor(Math.random() * this.canvasHeight / 4); // Appear in first quarte of screen
         this.endingY = Math.floor(Math.random() * this.canvasHeight / 4 + 3 * this.canvasHeight / 4); // Disappear in last quarter of screen
