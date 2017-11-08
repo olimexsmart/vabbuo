@@ -3,16 +3,15 @@
  */
 
 class fallingSentence {
-    constructor(canvas, canvasH, canvasW, mobile) {
-        //this.draw = this.draw.bind(this); // Pure magic to make work this.draw inside draw function itself        
+    constructor(canvas, mobile) {        
         this.sentence;
         this.author;
-        this.canvasWidth = canvasW;
-        this.canvasHeight = canvasH;
-        this.X = 150;
-        this.Y = 100;     // Hold upper left sentence position
-        this.speed = 1;         // Speed of falling down
-        this.size = 25;          // Font size in pixel
+        this.canvasWidth = canvas.width();
+        this.canvasHeight = canvas.height();
+        this.X;
+        this.Y;             // Holds upper left sentence position
+        this.speed;         // Speed of falling down
+        this.size;          // Font size in pixel
         this.lenghtMax = 150;
         this.font = "px theconsolas";
         this.requesting = false;
@@ -22,25 +21,25 @@ class fallingSentence {
         this.lastRetry = 0;
         this.endingY;
         this.fading = 0;
+        this.sat = 100;
+        this.light = 60;
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
 
-        this.requestSentence();
+        this.requestSentence(); // Begin
     }
 
 
     draw() {
         this.ctx.font = this.size + this.font;
-        var sat = 100;
-        var light = 60;
         // Fading in and out
         if (this.fading < 1 && this.Y < this.endingY)
             this.fading += 0.01;
         else if (this.fading > 0)
             this.fading -= 0.01;
         // Color setting
-        this.ctx.fillStyle = "hsla(" + this.color + "," + sat + "%," + light + "%," + this.fading + ")";
+        this.ctx.fillStyle = "hsla(" + this.color + "," + this.sat + "%," + this.light + "%," + this.fading + ")";
 
         //Splitting sentences in multiple lines
         var splitted = this.sentence.split(' ');
@@ -74,10 +73,10 @@ class fallingSentence {
         this.color++;
         this.color %= 360;
         /*
-            If position under the window size, request a new sentence
-            Not if already requested
-            If we had some error just wait a little bit before retring,
-            This also manages disconnections
+            If Y position is under the window size, request a new sentence.
+            Not if already requested.
+            If we had some error wait a little bit before retring.
+            This also manages disconnections.
         */
         if (this.Y - this.size > this.canvasHeight && !this.requesting) {
             if (!this.error) {   // Standard situation
@@ -89,15 +88,14 @@ class fallingSentence {
             }
         }
     }
-    /*
-     * This is wrong: we need to request a sentence, wait for it, and then create a new sentence
-     */
+    
+    // Request a new sentence from server
     requestSentence() {
         // Get from database new sentence with Ajax
         this.lastRetry = (new Date).getTime();
         var self = this;
 
-        this.request = $.ajax({
+        this.request = $.ajax({  // Request sending
             url: "sentence.php",
             method: "POST",
             dataType: "text",
@@ -110,7 +108,7 @@ class fallingSentence {
             }
         });
 
-        this.request.done(function (response) {
+        this.request.done(function (response) { // Called when we have response
             var decoded = JSON.parse(response);
             self.sentence = decoded.sentence;
             // Maybe we have the author or maybe not
@@ -119,21 +117,17 @@ class fallingSentence {
             else
                 self.author = null;
 
-            self.createNew();
+            self.createNew(); // Create a new sentence using the text just retreived
             self.requesting = false;
             self.error = false;
         });
-
-        /* Still don't know what to do here
-        this.request.fail(function(jqxhr, status, error) {        
-        })*/
     }
 
-    createNew() {
-        // Get from database new sentence with Ajax
-        //console.log("Creating new: " + this.sentence);         
+    // Compute all the parameters from the sentence we just got
+    createNew() {                
         // Smaller size as the lenght increases       
         this.size = Math.floor(350 / this.sentence.length + 10);
+        // Speed depends on the device, slower on pc
         if (this.mobile) {
             this.X = 10;
             // Slower with longer sentences                
@@ -141,13 +135,15 @@ class fallingSentence {
         } else {
             this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
             // Slower with longer sentences                
-            this.speed = (15 / this.sentence.length) + Math.random() * 0.3 + 0.1;
+            this.speed = (14 / this.sentence.length) + Math.random() * 0.4;
         }
-        //this.Y = -2 * this.size;  old stuff
+        
+        // Vertical (Y) position
         this.Y = Math.floor(Math.random() * this.canvasHeight / 4); // Appear in first quarte of screen
         this.endingY = Math.floor(Math.random() * this.canvasHeight / 4 + 3 * this.canvasHeight / 4); // Disappear in last quarter of screen
     }
 
+    // Utility to get text horizontal lenght given the settings
     getTextWidth(text, font) {
         // re-use canvas object for better performance
         var canvas = this.getTextWidth.canvas || (this.getTextWidth.canvas = document.createElement("canvas"));

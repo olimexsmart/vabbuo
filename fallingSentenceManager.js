@@ -6,12 +6,12 @@ class fallingSentenceManager {
         this.fS = [];
         this.canvas = canvas;
         this.ctx = canvas[0].getContext('2d');
-        this.canvasWidth;
-        this.canvasHeight;        
-        this.getCanvasDimensions();
+        this.canvasWidth = this.canvas.width();
+        this.canvasHeight = this.canvas.height();
+//        this.getCanvasDimensions();
         // Instanciate all the new objects
         for (var i = 0; i < howMany; i++) {
-            this.fS.push(new fallingSentence(canvas, this.canvasHeight, this.canvasWidth, mobile));
+            this.fS.push(new fallingSentence(canvas, mobile));
         }        
     }
 
@@ -22,11 +22,5 @@ class fallingSentenceManager {
         for (var i = 0; i < this.fS.length; i++) {
             this.fS[i].draw();            
         }    
-    }
-
-    // Updates canvas dimensions if they changed
-    getCanvasDimensions() {
-        this.canvasWidth = this.canvas.width();
-        this.canvasHeight = this.canvas.height();
     }
 }

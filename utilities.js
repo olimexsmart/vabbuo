@@ -1,5 +1,5 @@
 // Useful stuff
-function updateCanvasDimensions(canvas) {
+function updateCanvasDimensions(canvas) {  // Strecth canvas to window
   canvas.attr({ height: $(window).height(), width: $(window).width() });
 }
 
