@@ -36,7 +36,7 @@ function buttonDimensions (height) {
 // in milliseconds and decimals
 function animate(timestamp) {
 
-  fSM.drawAll(); // Sentence updating
+  fSM.drawAll(timestamp); // Sentence updating
 
   if (timestamp > lastColorUpdate + 400) {
     rainbow(); // Background color updating    

@@ -32,7 +32,7 @@ class fallingSentence {
     }
 
 
-    draw() {
+    draw(deltaT) {
         this.ctx.font = this.size + this.font;
         // Fading in and out
         if (this.fading < 1 && this.Y < this.endingY)
@@ -50,7 +50,7 @@ class fallingSentence {
         }
 
         // Advance sentence fall 
-        this.Y += this.speed;
+        this.Y += this.speed * deltaT;
         this.color++;
         this.color %= 360;
         /*
@@ -112,11 +112,11 @@ class fallingSentence {
         if (this.mobile) {
             this.X = 10;
             // Slower with longer sentences                
-            this.speed = (25 / this.sentence.length) + Math.random() * 0.4 + 0.1;
+            this.speed = (3 / this.sentence.length) + Math.random() * 0.02 + 0.01;
         } else {
-            this.X = Math.floor((Math.random() * (this.canvasWidth - this.getTextWidth(this.sentence, this.size + this.font))));
+            this.X = Math.floor((Math.random() * (this.canvasWidth - this.canvasWidth / 5)));
             // Slower with longer sentences                
-            this.speed = (10 / this.sentence.length) + Math.random() * 0.4 + 0.1;
+            this.speed = (1 / this.sentence.length) + Math.random() * 0.02 + 0.01;
         }
 
         // Splitting sentence in multiple lines
@@ -127,7 +127,7 @@ class fallingSentence {
         // 50 chars they say is helps readbility
         for (var i = 1; i < splitted.length; i++) {
             // First condition for mobile second on desktop            
-            if (this.getTextWidth(this.line[k] + splitted[i], this.ctx.font) < (this.canvasWidth - 30) && this.line[k].length < 50) {
+            if (this.getTextWidth(this.line[k] + splitted[i], this.size + this.font) < (this.canvasWidth - this.X - 10) && this.line[k].length < 50) {
                 this.line[k] += " " + splitted[i];
             } else {
                 k++;
