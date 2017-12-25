@@ -13,7 +13,7 @@ class fallingSentence {
         this.speed;         // Speed of falling down
         this.size;          // Font size in pixel
         this.lenghtMax = 150;
-        this.font = "px theconsolas";
+        this.font = "px Helvetica";
         this.requesting = false;
         this.mobile = mobile;
         this.color = Math.round(Math.random() * 360);
@@ -118,6 +118,10 @@ class fallingSentence {
             // Slower with longer sentences                
             this.speed = (1 / this.sentence.length) + Math.random() * 0.02 + 0.01;
         }
+        
+        // Vertical (Y) position
+        this.Y = Math.floor(Math.random() * this.canvasHeight / 4); // Appear in first quarte of screen
+        this.endingY = Math.floor(Math.random() * this.canvasHeight / 4 + 3 * this.canvasHeight / 4); // Disappear in last quarter of screen
 
         // Splitting sentence in multiple lines
         var splitted = this.sentence.split(' ');
@@ -139,18 +143,13 @@ class fallingSentence {
             this.line[k] = "-" + this.author;
         }
 
-        // Vertical (Y) position
-        this.Y = Math.floor(Math.random() * this.canvasHeight / 4); // Appear in first quarte of screen
-        this.endingY = Math.floor(Math.random() * this.canvasHeight / 4 + 3 * this.canvasHeight / 4); // Disappear in last quarter of screen
+
     }
 
     // Utility to get text horizontal lenght given the settings
     getTextWidth(text, font) {
-        // re-use canvas object for better performance
-        var canvas = this.getTextWidth.canvas || (this.getTextWidth.canvas = document.createElement("canvas"));
-        var context = canvas.getContext("2d");
-        context.font = font;
-        var metrics = context.measureText(text);
+        this.ctx.font = font;
+        var metrics = this.ctx.measureText(text);
         return metrics.width;
     }
 
