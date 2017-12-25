@@ -111,13 +111,12 @@ class fallingSentence {
         // Speed depends on the device, slower on pc
         if (this.mobile) {
             this.X = 10;
-            // Slower with longer sentences                
-            this.speed = (3 / this.sentence.length) + Math.random() * 0.02 + 0.01;
         } else {
             this.X = Math.floor((Math.random() * (this.canvasWidth - this.canvasWidth / 5)));
-            // Slower with longer sentences                
-            this.speed = (1 / this.sentence.length) + Math.random() * 0.02 + 0.01;
         }
+
+        // Slower with longer sentences                
+        this.speed = (1 / this.sentence.length) + Math.random() * 0.02 + 0.01;
         
         // Vertical (Y) position
         this.Y = Math.floor(Math.random() * this.canvasHeight / 4); // Appear in first quarte of screen
