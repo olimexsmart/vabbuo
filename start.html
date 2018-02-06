@@ -39,9 +39,9 @@
         // Reload on page resized  
         $(window).resize(function () { location.reload(); });        
         // Instanciating all objects
-        fSM = new fallingSentenceManager(canvas, 8, false);
+        SM = new fallingSentenceManager(canvas, 6);
         // Update button dimensions
-        buttonDimensions(fSM.canvasHeight);
+        buttonDimensions(SM.canvasHeight);
         // Begin animation 
         setTimeout(function () { // Used to wait a little for the AJAX responses            
             requestAnimationFrame(animate);

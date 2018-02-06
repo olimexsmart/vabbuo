@@ -2,27 +2,29 @@
  * REference: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations
  */
 
-class fallingSentence {
-    constructor(canvas) {
-        this.sentence;
-        this.author;
+class staticSentence {
+    constructor(canvas, X, Y) {
+        this.sentence;        
+        this.author;        
+        this.time;        
+        this.interval;
         this.canvasWidth = canvas.width();
         this.canvasHeight = canvas.height();
-        this.X;
-        this.Y;             // Holds upper left sentence position
-        this.speed;         // Speed of falling down
+        this.X = X;
+        this.Y = Y; // Vertial position around which the sentence will be centered     
+        this.Ycentered;
         this.size;          // Font size in pixel
         this.lenghtMax = 150;
-        this.font = "px Helvetica";
-        this.requesting = false;        
-        this.color = Math.round(Math.random() * 360);
-        this.error = false;
-        this.lastRetry = 0;
-        this.endingY;
-        this.fading = 0;
+        this.font = "px Helvetica";        
         this.sat = 100;
         this.light = 60;
+        this.color = Math.round(Math.random() * 360);
+        this.fading = 0;                        
         this.line;
+        this.lastRetry = 0;        
+        this.requesting = false;        
+        this.error = false;     
+        this.offesetAmount;   
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
@@ -31,34 +33,34 @@ class fallingSentence {
     }
 
 
-    draw(deltaT) {
+    draw() {
         this.ctx.font = this.size + this.font;
+        var elapsed = (new Date).getTime() - this.time;
         // Fading in and out
-        if (this.fading < 1 && this.Y < this.endingY)
-            this.fading += 0.01;
-        else if (this.fading > 0)
-            this.fading -= 0.01;
+        if (elapsed < this.interval / 10)
+            this.fading += 0.02;
+        else if (elapsed > this.interval * 0.9)
+            this.fading -= 0.02;        
         // Color setting
         this.ctx.fillStyle = "hsla(" + this.color + "," + this.sat + "%," + this.light + "%," + this.fading + ")";
 
         // Write each sentence line
         var offeset = 0;
         for (var i = 0; i < this.line.length; i++) {
-            this.ctx.fillText(this.line[i], this.X, Math.round(this.Y + offeset));
-            offeset += Math.round(this.size + (this.size / 3));
+            this.ctx.fillText(this.line[i], this.X, Math.round(this.Ycentered + offeset));
+            offeset += this.offesetAmount;
         }
 
-        // Advance sentence fall 
-        this.Y += this.speed * deltaT;
         this.color++;
         this.color %= 360;
+
         /*
-            If Y position is under the window size, request a new sentence.
+            If time is elapsed,
             Not if already requested.
             If we had some error wait a little bit before retring.
             This also manages disconnections.
         */
-        if (this.Y - this.size > this.canvasHeight && !this.requesting) {
+        if (elapsed > this.interval && !this.requesting) {
             if (!this.error) {   // Standard situation
                 this.requestSentence();
                 this.requesting = true;
@@ -106,17 +108,12 @@ class fallingSentence {
     // Compute all the parameters from the sentence we just got
     createNew() {
         // Smaller size as the lenght increases       
-        this.size = Math.floor(400 / (this.sentence.length + 5) + 10);
-        // Speed depends on the device, slower on pc
-        this.X = Math.floor((Math.random() * (this.canvasWidth - this.canvasWidth / 5)));        
-
-        // Slower with longer sentences                
-        this.speed = (1 / this.sentence.length) + 0.01;
+        this.size = Math.floor(1500 / (this.sentence.length + 12) + 10);  
+        this.offesetAmount = Math.round(this.size + (this.size / 3));  
+        // Creation and expiration times here
+        this.time = (new Date).getTime();        
+        this.interval = 5000 + Math.random() * 2000;
         
-        // Vertical (Y) position
-        this.Y = Math.floor(Math.random() * this.canvasHeight / 4); // Appear in first quarte of screen
-        this.endingY = Math.floor(Math.random() * this.canvasHeight / 4 + 3 * this.canvasHeight / 4); // Disappear in last quarter of screen
-
         // Splitting sentence in multiple lines
         var splitted = this.sentence.split(' ');
         this.line = [];
@@ -137,7 +134,11 @@ class fallingSentence {
             this.line[k] = "-" + this.author;
         }
 
-
+        // Vertical (Y) position, offeset for drawing taking into account
+        // the number of lines, the size and the space between lines
+        this.Ycentered = this.Y - ((this.line.length * this.offesetAmount - this.offesetAmount) / 2);
+        this.fading = 0;
+        //this.color = Math.round(Math.random() * 360);
     }
 
     // Utility to get text horizontal lenght given the settings
