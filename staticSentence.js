@@ -19,7 +19,8 @@ class staticSentence {
         this.sat = 100;
         this.light = 60;
         this.color = Math.round(Math.random() * 360);
-        this.fading = 0;                        
+        this.fading = 0;         
+        this.size = 30;               
         this.line;
         this.lastRetry = 0;        
         this.requesting = false;        
@@ -108,7 +109,7 @@ class staticSentence {
     // Compute all the parameters from the sentence we just got
     createNew() {
         // Smaller size as the lenght increases       
-        this.size = Math.floor(1500 / (this.sentence.length + 12) + 10);  
+        //this.size = Math.floor(1500 / (this.sentence.length + 12) + 10);  
         this.offesetAmount = Math.round(this.size + (this.size / 3));  
         // Creation and expiration times here
         this.time = (new Date).getTime();        
