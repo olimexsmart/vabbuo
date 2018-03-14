@@ -1,43 +1,64 @@
 <?php
 
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
+
 // Include and instantiate the class.
 require_once 'Mobile_Detect.php';
-// Database connection
-require_once 'login.php';
 
-class 
+
+class AccessLogger 
 {
     private $sql;
-    public $ip;
+    private $table;
+    // Make them visible in case other portions of code needs them
+    public $IP;
+    public $Detect;
+    public $Headers;
+    public $Geolocation;
+    public $UserAgent;
     
-    function __constructor() {
-        $sql = new mysqli($hostName, $userName, $passWord, $dataBase);
-        if ($sql->connect_error) {
-            die($sql->connect_error);
+    // The table is needed because each page has its own
+    // instead of one enormous one with all pages
+    function __construct ($table) {
+        // Database connection
+        require_once 'login.php';
+        $this->sql = new mysqli($hostName, $userName, $passWord, $dataBase);        
+        if ($this->sql->connect_error) {
+            die($this->sql->connect_error);
         }        
+        $this->table = $table;
     }
 
     function log() {
         // Getting information
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $headers = apache_request_headers();
-        $userAgent = preg_replace("/\'/", "\'", $headers['User-Agent']);
-
-        $geolocate = json_decode(file_get_contents('http://freegeoip.net/json/' . $ip), true);
-        $geolocation = preg_replace("/\'/", "\'",  $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city']);
-
-        $query = "INSERT INTO accessLog VALUES(NULL, NULL, '$ip', '$device', '$geolocation', '$userAgent')";
-
-        if (!$sql->query($query)) {
-            echo "Could not insert into database: " . $sql->error;
+        $this->Detect = new Mobile_Detect;
+        $device = "";
+        // First load the page
+        if($this->Detect->isMobile() && !$this->Detect->isTablet()){            
+            $device = "mobile";
+        } else {            
+            $device = "PC";
+        }
+        // Just check if tablet
+        if($this->Detect->isTablet()) {
+            $device = "tablet";
         }
 
-        $sql->close();
+
+        $this->IP = $_SERVER['REMOTE_ADDR'];
+        $this->Headers = apache_request_Headers();
+        $this->UserAgent = preg_replace("/\'/", "\'", $this->Headers['User-Agent']);
+
+        $geolocate = json_decode(file_get_contents('http://freegeoIP.net/json/' . $this->IP), true);
+        $this->Geolocation = preg_replace("/\'/", "\'",  $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city']);
+
+        $query = "INSERT INTO $this->table VALUES(NULL, NULL, '$this->IP', '$device', '$this->Geolocation', '$this->UserAgent')";        
+        if (!$this->sql->query($query)) {
+            echo "Could not insert into database: " . $this->sql->error;
+        }
+
+        $this->sql->close();
     }
 }
-
-
-
-
-
 ?>
