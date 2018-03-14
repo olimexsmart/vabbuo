@@ -60,7 +60,7 @@
             <br>
 
             <form id="newsentence" method="post">
-                <!-- Text inputs -->
+                <!-- Nickname -->
                 <div class="form-group row">
                     <label for="nickname" class="col-sm-2 col-form-label">
                         <b>Nickname</b>
@@ -69,6 +69,10 @@
                         <input type="text" class="form-control" name="nickname" id="nickname" placeholder="Nickname" data-toggle="tooltip" data-placement="right"
                             title="Dimmi chi non sei">
                     </div>
+                </div>
+
+                <!-- Sentence -->
+                <div class="form-group row">
                     <label for="sentence" class="mt-2 col-sm-2 col-form-label">
                         <b>Frase</b>
                     </label>
@@ -81,9 +85,9 @@
                 <!-- Radio buttons -->
                 <fieldset class="form-group">
                     <div class="row">
-                        <label for="radiogroup" class="col-sm-2 col-form-label">
+                        <legend for="radiogroup" class="col-sm-2 col-form-label">
                             <b>Sesso</b>
-                        </label>
+                        </legend>
                         <div class="btn-group btn-group-toggle col-sm-10" data-toggle="buttons" id="radiogroup">
                             <label class="btn btn-secondary">
                                 <input type="radio" name="sex" id="radio1" value="uomo" autocomplete="off" checked> Uomo
@@ -101,7 +105,7 @@
                     </div>
                 </fieldset>
 
-                <!-- Checkbox -->
+                <!-- Comments -->
                 <div class="form-group row">
                     <label for="other" class="col-sm-2 col-form-label">
                         <b>Commento</b>
@@ -111,7 +115,10 @@
                             cols="40" data-toggle="tooltip" data-placement="right" title="Non essere cattivo che piango poi"
                             rows="2"></textarea>
                     </div>
+                </div>
 
+                <!-- Checkbox -->
+                <div class="form-group row">
                     <div class="mt-2 col-sm-2">
                         <b>Marpione</b>
                     </div>
@@ -121,21 +128,27 @@
                                 <input class="form-check-input" type="checkbox" name="marpione" id="marpione" value="marpione"> Scrivimi per sapere come sto</label>
                         </div>
                     </div>
+                </div>
 
-                    <label for="email" class="mt-2 col-sm-2 col-form-label" id="emailLabel">
+                <!-- Email -->
+                <div class="form-group row" id="emailGroup">
+                    <label for="email" class="mt-2 col-sm-2 col-form-label">
                         <b>Email</b>
                     </label>
-                    <div class="mt-2 col-sm-10" id="emailDiv">
+                    <div class="mt-2 col-sm-10">
                         <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-toggle="tooltip" data-placement="right"
                             title="Quella che usi per lo spam">
                     </div>
+                </div>
 
-                    <!-- <legend class="col-form-legend col-sm-2"></legend> -->
+                <!-- Button -->
+                <div class="form-group row">
                     <div class="mt-2 col-sm-12 text-center">
                         <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="tooltip" data-placement="bottom" title="Che figo Bootstrap"
                             id="submit">Vabbuò dai invia</button>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>
@@ -191,7 +204,10 @@
         setInterval("rainbow(document.body, 55, 30)", 400);
 
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip();
+            if (!/Mobi/.test(navigator.userAgent)) {
+                $('[data-toggle="tooltip"]').tooltip();
+            }
+
             $('#radio3')[0].checked = true;
 
 
@@ -208,16 +224,13 @@
                 $('#sentence').val("");
             });
 
-            $('#emailDiv').hide();
-            $('#emailLabel').hide();
+            $('#emailGroup').hide();
             $('#marpione').click(function myFunction() {
                 if ($('#marpione').is(':checked')) {
-                    $('#emailDiv').show();
-                    $('#emailLabel').show();
+                    $('#emailGroup').show();
                 }
                 else {
-                    $('#emailDiv').hide();
-                    $('#emailLabel').hide();
+                    $('#emailGroup').hide();
                 }
             });
 
