@@ -4,18 +4,21 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Eh vabbuò</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="formatting.css">
+    <!-- JavaScript -->
     <script src='OSC.js'></script>
     <script src='utilities.js'></script>
     <script src="fallingSentence.js"></script>
     <script src="fallingSentenceManager.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="formatting.css">
+
 </head>
 
 
 <body>
     <!-- Canvas for sentences -->
-    <canvas id="c"></canvas> 
+    <canvas id="c"></canvas>
     <!-- SVG button -->
     <svg width="100" height="100" id="svgButton">
         <a xlink:href="/main.php">
@@ -32,12 +35,12 @@
         lastColorUpdate = 400;
         canvas = $("#c");
         // Fast color apply
-        rainbow(); 
+        rainbow();
         svgButton();
         // Strech canvas to the whole page
-        updateCanvasDimensions(canvas);      
+        updateCanvasDimensions(canvas);
         // Reload on page resized  
-        $(window).resize(function () { location.reload(); });        
+        $(window).resize(function () { location.reload(); });
         // Instanciating all objects
         SM = new fallingSentenceManager(canvas, 6);
         // Update button dimensions
