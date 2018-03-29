@@ -4,7 +4,7 @@
 
 class fallingSentence {
     constructor(canvas) {
-        this.sentence;
+        this.sentence = null;
         this.author;
         this.canvasWidth = canvas.width();
         this.canvasHeight = canvas.height();
@@ -32,6 +32,9 @@ class fallingSentence {
 
 
     draw(deltaT) {
+        if (this.sentence == null) 
+            return;
+
         this.ctx.font = this.size + this.font;
         // Fading in and out
         if (this.fading < 1 && this.Y < this.endingY)
@@ -65,6 +68,7 @@ class fallingSentence {
             } else if (this.error && this.lastRetry + 5000 < (new Date).getTime()) {
                 this.requestSentence();
                 this.requesting = true;
+                console.log("There was an error");
             }
         }
     }
@@ -90,6 +94,11 @@ class fallingSentence {
 
         this.request.done(function (response) { // Called when we have response
             var decoded = JSON.parse(response);
+            if (decoded.sentence == null) {
+                self.requesting = false;
+                self.error = true;
+                return;
+            }
             self.sentence = decoded.sentence;
             // Maybe we have the author or maybe not
             if (typeof decoded.author != 'undefined')
