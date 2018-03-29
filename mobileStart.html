@@ -11,6 +11,8 @@
     <!-- JavaScript -->
     <script src='OSC.js'></script>
     <script src='utilities.js'></script>
+    <script src="sentence.js"></script>
+    <script src="sentenceManager.js"></script>
     <script src="staticSentence.js"></script>
     <script src="staticSentenceManager.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -73,10 +75,8 @@
         // Reload on page resized  
         $(window).resize(function () { location.reload(); });
         // Instanciating all objects
-        ss = [];
-        ss.push(new staticSentence(canvas, 15, canvasHeight * 0.25));
-        ss.push(new staticSentence(canvas, 15, canvasHeight * 0.75));
-        SM = new staticSentenceManager(canvas, ss);
+        position =  [[15, canvasHeight * 0.25], [15, canvasHeight * 0.75]];
+        SM = new staticSentenceManager(canvas, position);
         // Update button dimensions
         buttonDimensions(canvasHeight);
         // Begin animation 
