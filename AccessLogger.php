@@ -11,12 +11,13 @@ class AccessLogger
 {
     private $sql;
     private $table;
+    private $apiKey;
     // Make them visible in case other portions of code needs them
     public $IP;
     public $Detect;
     public $Headers;
     public $Geolocation;
-    public $UserAgent;
+    public $UserAgent;    
     
     // The table is needed because each page has its own
     // instead of one enormous one with all pages
@@ -28,6 +29,7 @@ class AccessLogger
             die($this->sql->connect_error);
         }        
         $this->table = $table;
+        $this->apiKey = $apiKey;
     }
 
     function log() {
@@ -50,7 +52,7 @@ class AccessLogger
         $this->Headers = apache_request_Headers();
         $this->UserAgent = preg_replace("/\'/", "\'", $this->Headers['User-Agent']);
 
-        $geolocate = json_decode(file_get_contents('http://freegeoIP.net/json/' . $this->IP), true);
+        $geolocate = json_decode(file_get_contents("http://api.ipstack.com/$this->IP?access_key=$this->apiKey&output=json&legacy=1"), true);
         $this->Geolocation = preg_replace("/\'/", "\'",  $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city']);
 
         $query = "INSERT INTO $this->table VALUES(NULL, NULL, '$this->IP', '$device', '$this->Geolocation', '$this->UserAgent')";        

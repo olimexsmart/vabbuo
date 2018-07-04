@@ -11,7 +11,7 @@ $sql->query('SET NAMES utf8');
 
 // Getting seed from client
 $seed = isset($_POST['seed']) ? $_POST['seed'] : null;
-if($seed == null) { die("NULL seed"); }
+if ($seed == null) {die("NULL seed");}
 if (filter_var($seed, FILTER_VALIDATE_INT) === false) {
     die("Invalid seed integer");
 }
@@ -32,47 +32,28 @@ if (!$result = $sql->query($query)) {
 
 // Response depending we have an author or not
 $fetched = $result->fetch_row();
-if ($fetched[1] != null){
+if ($fetched[1] != null) {
     $response = array(
-        'sentence'  => $fetched[0],
-        'author'    => $fetched[1]
+        'sentence' => $fetched[0],
+        'author' => $fetched[1],
     );
 } else {
     $response = array(
-        'sentence'  => $fetched[0]        
+        'sentence' => $fetched[0],
     );
 }
 echo json_encode($response); // Sending senstence to client
-
 
 /*  STATISTICS */
 //Getting a time stamp of current hour
 $now = new DateTime();
 $format = $now->format('Y-m-d H') . ":00:00";
-$then = new DateTime($format);
-$epoch = $then->getTimestamp();
 
-$query = "SELECT * FROM statistics WHERE epoch = $epoch";   // Getting last row
-if (!$data = $sql->query($query)) {
-    die("Error retreiving row statistics.");
+// Insert only if key is not present, otherwise update
+$query = "INSERT INTO vabbuo.statistics VALUES('$format', 1)
+				ON DUPLICATE KEY UPDATE requests = requests + 1;";
+if (!$sql->query($query)) {
+    die("Could not insert into database: " . $sql->error);
 }
-$result = $data->fetch_row();
-
-date_default_timezone_set('Europe/Rome'); // Avoid messing with timezones in contructors
-
-if ($result) { // If we have our time slot
-    // Increment the requests field
-    $query = "UPDATE statistics SET requests = $result[2] + 1 WHERE no = $result[0]";
-    if (!$sql->query($query)) {
-        die("Error updating statistics.");
-    }
-} else {  // Else insert a row
-    $insert = "INSERT INTO statistics VALUES(NULL, '$format', 1, $epoch)";
-    if (!$sql->query($insert)) {
-        echo "Could not insert into database: " . $sql->error;
-    }
-}
-
 
 $sql->close();
-
