@@ -9,7 +9,7 @@ function rainbow() {
     color %= 360;
 }
 
-function svgButton () {
+function svgButton() {
     S('inner').fill = "hsl(" + colorInner + ", 55%, 50%)";
     S('outer').fill = "hsl(" + colorOuter + ", 55%, 20%)";
     colorInner++;
@@ -18,7 +18,7 @@ function svgButton () {
     colorOuter %= 360;
 }
 
-function buttonDimensions (height) {
+function buttonDimensions(height) {
     radius = Math.floor(height / 14); // Bomber Lino
     S('svgButton').height = radius * 2;
     S('svgButton').width = radius * 2;

@@ -86,13 +86,13 @@ class sentence {
         var self = this;
 
         this.request = $.ajax({  // Request sending
-                url: "sentence.php",
-                method: "POST",
-                dataType: "text",
-                data: { seed: Math.floor((Math.random() * 10000) + 1) },
-                // Catch error disconnections
-                // Chrome error will come up anyway, but we keep the thing going
-                error: function (data) {
+            url: "sentence.php",
+            method: "POST",
+            dataType: "text",
+            data: { seed: Math.floor((Math.random() * 10000) + 1) },
+            // Catch error disconnections
+            // Chrome error will come up anyway, but we keep the thing going
+            error: function (data) {
                 self.requesting = false;
                 self.error = true;
             }

@@ -67,4 +67,3 @@ class AccessLogger
         $this->sql->close();
     }
 }
-?>

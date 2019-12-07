@@ -36,13 +36,13 @@ if (!$result = $sql->query($query)) {
 $fetched = $result->fetch_row();
 if ($fetched[1] != null) {
     $response = array(
-                    'sentence' => $fetched[0],
-                    'author' => $fetched[1],
-                );
+        'sentence' => $fetched[0],
+        'author' => $fetched[1],
+    );
 } else {
     $response = array(
-                    'sentence' => $fetched[0],
-                );
+        'sentence' => $fetched[0],
+    );
 }
 echo json_encode($response); // Sending senstence to client
 

@@ -1,3 +1,3 @@
 # vabbuo.it
 
-Repo for very important stuff
+Nonsense site made as a full stack web developing excericise

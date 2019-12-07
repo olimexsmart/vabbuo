@@ -3,252 +3,267 @@
 
 
 <head>
-<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                           <title>Eh vabbuò</title>
-                           <!-- CSS -->
-                           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-                                     crossorigin="anonymous">
-                                             <!-- JavaScript -->
-                                             <script src='OSC.js'></script>
-                                                     <script src='utilities.js'></script>
-                                                             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                                                                     crossorigin="anonymous"></script>
-                                                                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                                                                                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                                                                                             crossorigin="anonymous"></script>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Eh vabbuò</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- JavaScript -->
+    <script src='OSC.js'></script>
+    <script src='utilities.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
-                                                                                                     <style>
-                                                                                                     html,
-body {
-    height: 100%;
-}
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
 
-.container {
-display:
-    table;
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    max-width: 540px;
-margin:
-    auto;
-}
+        .container {
+            display:
+                table;
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            max-width: 540px;
+            margin:
+                auto;
+        }
 
-.inner-container {
-display:
-    table-cell;
-vertical-align:
-    middle;
-    max-width: 540px;
-margin:
-    auto;
-}
-</style>
+        .inner-container {
+            display:
+                table-cell;
+            vertical-align:
+                middle;
+            max-width: 540px;
+            margin:
+                auto;
+        }
+    </style>
 </head>
 
 <body style="background-color: hsl(120, 55%, 30%);">
-            <div class="container">
-                           <div class="inner-container">
-                                          <br>
-                                          <!-- Welcome card -->
-                                          <div class="card text-center">
-                                                      <div class="card-body bg-transparent">
-                                                                  <h4 class="card-title">Bomber inserisci un po' una frase!</h4>
-                                                                              <p class="card-text">Non sentirti in ansia, inserisci solo quello che vuoi. Puoi anche lasciare tutto vuoto e cliccare solo
-                                                                                          per dirmi che sei passato. Noi siamo dei tipi da vabbuò qui, mica dei precisini. </p>
-                                                                                          <a href="http://vabbuo.it" class="mt-2 btn btn-success" data-toggle="tooltip" data-placement="left" title="Vabbuò dai guardati ancora due frasi">Torna a Vabbuò</a>
-                                                                                                      <a href="http://olimexsmart.it" class="mt-2 btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Scopri tutta la storia, in inglese ma vabbuò">Olimexsmart</a>
-                                                                                                                  <button class="mt-2 btn btn-info" id="why" data-toggle="tooltip" data-placement="right" title="Coraggio">Si ma perché?</button>
-                                                                                                                              </div>
-                                                                                                                              </div>
+    <div class="container">
+        <div class="inner-container">
+            <br>
+            <!-- Welcome card -->
+            <div class="card text-center">
+                <div class="card-body bg-transparent">
+                    <h4 class="card-title">Bomber inserisci un po' una frase!</h4>
+                    <p class="card-text">Non sentirti in ansia, inserisci solo quello che vuoi. Puoi anche lasciare
+                        tutto vuoto e cliccare solo
+                        per dirmi che sei passato. Noi siamo dei tipi da vabbuò qui, mica dei precisini. </p>
+                    <a href="http://vabbuo.it" class="mt-2 btn btn-success" data-toggle="tooltip" data-placement="left"
+                        title="Vabbuò dai guardati ancora due frasi">Torna a Vabbuò</a>
+                    <a href="http://olimexsmart.it" class="mt-2 btn btn-danger" data-toggle="tooltip"
+                        data-placement="bottom" title="Scopri tutta la storia, in inglese ma vabbuò">Olimexsmart</a>
+                    <button class="mt-2 btn btn-info" id="why" data-toggle="tooltip" data-placement="right"
+                        title="Coraggio">Si ma perché?</button>
+                </div>
+            </div>
 
-                                                                                                                              <br>
+            <br>
 
-                                                                                                                              <form id="newsentence" method="post">
-                                                                                                                                      <!-- Nickname -->
-                                                                                                                                      <div class="form-group row">
-                                                                                                                                                  <label for="nickname" class="col-sm-2 col-form-label">
-                                                                                                                                                              <b>Nickname</b>
-                                                                                                                                                              </label>
-                                                                                                                                                              <div class="col-sm-10">
-                                                                                                                                                                          <input type="text" class="form-control" name="nickname" id="nickname" placeholder="Nickname" data-toggle="tooltip" data-placement="right"
-                                                                                                                                                                                      title="Dimmi chi non sei">
-                                                                                                                                                                                              </div>
-                                                                                                                                                                                              </div>
+            <form id="newsentence" method="post">
+                <!-- Nickname -->
+                <div class="form-group row">
+                    <label for="nickname" class="col-sm-2 col-form-label">
+                        <b>Nickname</b>
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="nickname" id="nickname" placeholder="Nickname"
+                            data-toggle="tooltip" data-placement="right" title="Dimmi chi non sei">
+                    </div>
+                </div>
 
-                                                                                                                                                                                              <!-- Sentence -->
-                                                                                                                                                                                              <div class="form-group row">
-                                                                                                                                                                                                          <label for="sentence" class="mt-2 col-sm-2 col-form-label">
-                                                                                                                                                                                                                          <b>Frase</b>
-                                                                                                                                                                                                                          </label>
-                                                                                                                                                                                                                          <div class="mt-2 col-sm-10">
-                                                                                                                                                                                                                                      <textarea type="text" class="form-control" name="sentence" id="sentence" placeholder="Scrivi o copia la tua frase qui" cols="40"
-                                                                                                                                                                                                                                                  data-toggle="tooltip" data-placement="right" title="Meglio in italiano ma vabbuò" rows="5"></textarea>
-                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                          </div>
+                <!-- Sentence -->
+                <div class="form-group row">
+                    <label for="sentence" class="mt-2 col-sm-2 col-form-label">
+                        <b>Frase</b>
+                    </label>
+                    <div class="mt-2 col-sm-10">
+                        <textarea type="text" class="form-control" name="sentence" id="sentence"
+                            placeholder="Scrivi o copia la tua frase qui" cols="40" data-toggle="tooltip"
+                            data-placement="right" title="Meglio in italiano ma vabbuò" rows="5"></textarea>
+                    </div>
+                </div>
 
-                                                                                                                                                                                                                                                          <!-- Radio buttons -->
-                                                                                                                                                                                                                                                          <fieldset class="form-group">
-                                                                                                                                                                                                                                                                      <div class="row">
-                                                                                                                                                                                                                                                                                  <legend for="radiogroup" class="col-sm-2 col-form-label">
-                                                                                                                                                                                                                                                                                                  <b>Sesso</b>
-                                                                                                                                                                                                                                                                                                  </legend>
-                                                                                                                                                                                                                                                                                                  <div class="btn-group btn-group-toggle col-sm-10" data-toggle="buttons" id="radiogroup">
-                                                                                                                                                                                                                                                                                                              <label class="btn btn-secondary">
-                                                                                                                                                                                                                                                                                                                          <input type="radio" name="sex" id="radio1" value="uomo" autocomplete="off" checked> Uomo
-                                                                                                                                                                                                                                                                                                                                  </label>
-                                                                                                                                                                                                                                                                                                                                  <label class="btn btn-secondary">
-                                                                                                                                                                                                                                                                                                                                              <input type="radio" name="sex" id="radio2" value="donna" autocomplete="off"> Donna
-                                                                                                                                                                                                                                                                                                                                                      </label>
-                                                                                                                                                                                                                                                                                                                                                      <label class="btn btn-secondary active">
-                                                                                                                                                                                                                                                                                                                                                                  <input type="radio" name="sex" id="radio3" value="misto" autocomplete="off"> Misto
-                                                                                                                                                                                                                                                                                                                                                                          </label>
-                                                                                                                                                                                                                                                                                                                                                                          <label class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Ahahaha">
-                                                                                                                                                                                                                                                                                                                                                                                      <input type="radio" name="sex" id="radio4" value="tanto" autocomplete="off"> Tanto
-                                                                                                                                                                                                                                                                                                                                                                                              </label>
-                                                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                                              </fieldset>
+                <!-- Radio buttons -->
+                <fieldset class="form-group">
+                    <div class="row">
+                        <legend for="radiogroup" class="col-sm-2 col-form-label">
+                            <b>Sesso</b>
+                        </legend>
+                        <div class="btn-group btn-group-toggle col-sm-10" data-toggle="buttons" id="radiogroup">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="sex" id="radio1" value="uomo" autocomplete="off" checked> Uomo
+                            </label>
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="sex" id="radio2" value="donna" autocomplete="off"> Donna
+                            </label>
+                            <label class="btn btn-secondary active">
+                                <input type="radio" name="sex" id="radio3" value="misto" autocomplete="off"> Misto
+                            </label>
+                            <label class="btn btn-secondary" data-toggle="tooltip" data-placement="right"
+                                title="Ahahaha">
+                                <input type="radio" name="sex" id="radio4" value="tanto" autocomplete="off"> Tanto
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
 
-                                                                                                                                                                                                                                                                                                                                                                                              <!-- Comments -->
-                                                                                                                                                                                                                                                                                                                                                                                              <div class="form-group row">
-                                                                                                                                                                                                                                                                                                                                                                                                          <label for="other" class="col-sm-2 col-form-label">
-                                                                                                                                                                                                                                                                                                                                                                                                                          <b>Commento</b>
-                                                                                                                                                                                                                                                                                                                                                                                                                          </label>
-                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="col-sm-10">
-                                                                                                                                                                                                                                                                                                                                                                                                                                      <textarea type="text" class="form-control" name="other" id="other" placeholder="Se volessi anche solo scrivere un commento"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  cols="40" data-toggle="tooltip" data-placement="right" title="Non essere cattivo che piango poi"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                          rows="2"></textarea>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
+                <!-- Comments -->
+                <div class="form-group row">
+                    <label for="other" class="col-sm-2 col-form-label">
+                        <b>Commento</b>
+                    </label>
+                    <div class="col-sm-10">
+                        <textarea type="text" class="form-control" name="other" id="other"
+                            placeholder="Se volessi anche solo scrivere un commento" cols="40" data-toggle="tooltip"
+                            data-placement="right" title="Non essere cattivo che piango poi" rows="2"></textarea>
+                    </div>
+                </div>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <!-- Checkbox -->
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <div class="form-group row">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <div class="mt-2 col-sm-2">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <b>Marpione</b>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="mt-2 col-sm-10">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <div class="form-check" data-toggle="tooltip" data-placement="right" title='"Ehi come stai cit."'>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <label class="form-check-label">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <input class="form-check-input" type="checkbox" name="marpione" id="marpione" value="marpione"> Scrivimi per sapere come sto</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
+                <!-- Checkbox -->
+                <div class="form-group row">
+                    <div class="mt-2 col-sm-2">
+                        <b>Marpione</b>
+                    </div>
+                    <div class="mt-2 col-sm-10">
+                        <div class="form-check" data-toggle="tooltip" data-placement="right"
+                            title='"Ehi come stai cit."'>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="marpione" id="marpione"
+                                    value="marpione"> Scrivimi per sapere come sto</label>
+                        </div>
+                    </div>
+                </div>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <!-- Email -->
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="form-group row" id="emailGroup">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <label for="email" class="mt-2 col-sm-2 col-form-label">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <b>Email</b>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <div class="mt-2 col-sm-10">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-toggle="tooltip" data-placement="right"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              title="Quella che usi per lo spam">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
+                <!-- Email -->
+                <div class="form-group row" id="emailGroup">
+                    <label for="email" class="mt-2 col-sm-2 col-form-label">
+                        <b>Email</b>
+                    </label>
+                    <div class="mt-2 col-sm-10">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email"
+                            data-toggle="tooltip" data-placement="right" title="Quella che usi per lo spam">
+                    </div>
+                </div>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <!-- Button -->
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <div class="form-group row">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <div class="mt-2 col-sm-12 text-center">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="tooltip" data-placement="bottom" title="Che figo Bootstrap"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          id="submit">Vabbuò dai invia</button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
+                <!-- Button -->
+                <div class="form-group row">
+                    <div class="mt-2 col-sm-12 text-center">
+                        <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="tooltip"
+                            data-placement="bottom" title="Che figo Bootstrap" id="submit">Vabbuò dai invia</button>
+                    </div>
+                </div>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </form>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
+            </form>
+        </div>
+    </div>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <!-- Modal thanks -->
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <div class="modal fade" id="thanks" tabindex="-1" role="dialog" aria-labelledby="thanksLabel" aria-hidden="true">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <div class="modal-dialog" role="document">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="modal-content">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <div class="modal-header">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <h5 class="modal-title" id="thanksLabel">Come farei senza di te</h5>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <span aria-hidden="true">&times;
-</span>
-</button>
-</div>
-<div class="modal-body">
-           Grazie caro! Se vuoi ne puoi pure inviare un'altra lì così zan zan
-           </div>
-           <div class="modal-footer">
-                          <button type="button" class="btn btn-success" data-dismiss="modal">Prego!</button>
-                                           </div>
-                                           </div>
-                                           </div>
-                                           </div>
+    <!-- Modal thanks -->
+    <div class="modal fade" id="thanks" tabindex="-1" role="dialog" aria-labelledby="thanksLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="thanksLabel">Come farei senza di te</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Grazie caro! Se vuoi ne puoi pure inviare un'altra lì così zan zan
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Prego!</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                           <!-- Modal -->
-                                           <div class="modal fade" id="whyModal" tabindex="-1" role="dialog" aria-labelledby="whyModalTitle" aria-hidden="true">
-                                                       <div class="modal-dialog" role="document">
-                                                                   <div class="modal-content">
-                                                                               <div class="modal-header">
-                                                                                           <h5 class="modal-title" id="whyModalTitle">Cioè tipo frè</h5>
-                                                                                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                                                   <span aria-hidden="true">&times;
-</span>
-</button>
-</div>
-<div class="modal-body">
-           <p>Insomma perché no? Alla fine che importanza ha?</p>
+    <!-- Modal -->
+    <div class="modal fade" id="whyModal" tabindex="-1" role="dialog" aria-labelledby="whyModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="whyModalTitle">Cioè tipo frè</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Insomma perché no? Alla fine che importanza ha?</p>
 
-           <p>Vabbuò è uno spirito di vita dove non ci si da troppa importanza. Non ci siamo solo noi. Nessuno è obbligato ad ascoltare ogni nostro capriccio.</p>
+                    <p>Vabbuò è uno spirito di vita dove non ci si da troppa importanza. Non ci siamo solo noi. Nessuno
+                        è obbligato ad ascoltare ogni nostro capriccio.</p>
 
-           <p>Vabbuò perché essere pieni di noi stessi non ci condurrà ad una vita felice.</p>
+                    <p>Vabbuò perché essere pieni di noi stessi non ci condurrà ad una vita felice.</p>
 
-           <p>Vabbuò noi possiamo anche essere indifferenti agli altri, ma gli altri non devono essere indifferenti a noi.</p>
+                    <p>Vabbuò noi possiamo anche essere indifferenti agli altri, ma gli altri non devono essere
+                        indifferenti a noi.</p>
 
-           <p>Semplicemente accogliamo ogni istante, con ogni felicità e rammarico che esso porta, perché alla fine vabbuò dai non ha così importanza.</p>
-           </div>
-           <div class="modal-footer">
-                          <a href="http://olimexsmart.it" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Scopri tutta la storia, in inglese ma vabbuò">Olimexsmart</a>
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi va</button>
-                                                  </div>
-                                                  </div>
-                                                  </div>
-                                                  </div>
+                    <p>Semplicemente accogliamo ogni istante, con ogni felicità e rammarico che esso porta, perché alla
+                        fine vabbuò dai non ha così importanza.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="http://olimexsmart.it" class="btn btn-danger" data-toggle="tooltip" data-placement="left"
+                        title="Scopri tutta la storia, in inglese ma vabbuò">Olimexsmart</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi va</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                                  <script>
-                                                  color = 120;
-setInterval("rainbow(document.body, 55, 30)", 400);
+    <script>
+        color = 120;
+        setInterval("rainbow(document.body, 55, 30)", 400);
 
-$(function () {
-    if (!/Mobi/.test(navigator.userAgent)) {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+        $(function () {
+            if (!/Mobi/.test(navigator.userAgent)) {
+                $('[data-toggle="tooltip"]').tooltip();
+            }
 
-    $('#radio3')[0].checked = true;
+            $('#radio3')[0].checked = true;
 
 
-    $('#submit').click(function () {
-        $.ajax({
-url: "submitSentence.php",
-method: "POST",
-dataType: "text",
-data: $('#newsentence').serialize()
-        });
-        //alert("Sent");
-        $('#thanks').modal();
-        // Reset the sentence box
-        $('#sentence').val("");
-    });
+            $('#submit').click(function () {
+                $.ajax({
+                    url: "submitSentence.php",
+                    method: "POST",
+                    dataType: "text",
+                    data: $('#newsentence').serialize()
+                });
+                //alert("Sent");
+                $('#thanks').modal();
+                // Reset the sentence box
+                $('#sentence').val("");
+            });
 
-    $('#emailGroup').hide();
-    $('#marpione').click(function myFunction() {
-        if ($('#marpione').is(':checked')) {
-            $('#emailGroup').show();
-        }
-        else {
             $('#emailGroup').hide();
-        }
-    });
+            $('#marpione').click(function myFunction() {
+                if ($('#marpione').is(':checked')) {
+                    $('#emailGroup').show();
+                }
+                else {
+                    $('#emailGroup').hide();
+                }
+            });
 
-    $('#why').click(function () {
-        $('#whyModal').modal();
-    })
-})
-</script>
+            $('#why').click(function () {
+                $('#whyModal').modal();
+            })
+        })
+    </script>
 </body>
 
 </html>
