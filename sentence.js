@@ -5,10 +5,10 @@ class sentence {
         this.canvasWidth = canvas.width();
         this.canvasHeight = canvas.height();
         this.X;
-        this.Y;             // Holds upper left sentence position                
+        this.Y;             // Holds upper left sentence position
         this.size;          // Font size in pixel
         this.lenghtMax = 150;
-        this.font = "px Helvetica";
+        this.font = "px Arial";
         this.color = Math.round(Math.random() * 360);
         this.fading = 0;
         this.sat = 100;
@@ -20,6 +20,7 @@ class sentence {
         this.offesetAmount;
         this.fade;
         this.refresh;
+        this.lineOffesets;
 
         // Reading canvas context from jquey object
         this.ctx = canvas[0].getContext('2d');
@@ -53,9 +54,16 @@ class sentence {
 
         // Write each sentence line
         var offeset = 0;
-        for (var i = 0; i < this.line.length; i++) {
-            this.ctx.fillText(this.line[i], this.X, Math.round(this.Y + offeset));
-            offeset += this.offesetAmount;
+        if (this.X == null) {
+            for (var i = 0; i < this.line.length; i++) {
+                this.ctx.fillText(this.line[i], this.lineOffesets[i], Math.round(this.Y + offeset));
+                offeset += this.offesetAmount;
+            }
+        } else {
+            for (var i = 0; i < this.line.length; i++) {
+                this.ctx.fillText(this.line[i], this.X, Math.round(this.Y + offeset));
+                offeset += this.offesetAmount;
+            }
         }
 
         // Check if its time to request a new sentence
@@ -78,13 +86,13 @@ class sentence {
         var self = this;
 
         this.request = $.ajax({  // Request sending
-            url: "sentence.php",
-            method: "POST",
-            dataType: "text",
-            data: { seed: Math.floor((Math.random() * 10000) + 1) },
-            // Catch error disconnections
-            // Chrome error will come up anyway, but we keep the thing going
-            error: function (data) {
+                url: "sentence.php",
+                method: "POST",
+                dataType: "text",
+                data: { seed: Math.floor((Math.random() * 10000) + 1) },
+                // Catch error disconnections
+                // Chrome error will come up anyway, but we keep the thing going
+                error: function (data) {
                 self.requesting = false;
                 self.error = true;
             }
@@ -110,26 +118,34 @@ class sentence {
     }
 
     // Compute all the parameters from the sentence we just got
-    createNew() {        
+    createNew() {
         this.fading = 0;
         // Splitting sentence in multiple lines
         var splitted = this.sentence.split(' ');
         this.line = [];
+        this.lineOffesets = [];
         var k = 0;
         this.line[0] = splitted[0];
+        var constOffeset = this.canvasWidth / 2;
+
         // 50 chars they say is helps readbility
         for (var i = 1; i < splitted.length; i++) {
-            // First condition for mobile second on desktop            
-            if (this.getTextWidth(this.line[k] + splitted[i], this.size + this.font) < (this.canvasWidth - this.X - 10) && this.line[k].length < 50) {
+            // First condition for mobile second on desktop
+            if (this.getTextWidth(this.line[k] + splitted[i], this.size + this.font) < (this.canvasWidth - this.X - 15) && this.line[k].length < 50) {
                 this.line[k] += " " + splitted[i];
             } else {
+                this.lineOffesets[k] = constOffeset - (this.getTextWidth(this.line[k]) / 2);
                 k++;
                 this.line[k] = splitted[i];
             }
         }
+        // One last time, because the incrementing logic if offset by one
+        this.lineOffesets[k] = constOffeset - (this.getTextWidth(this.line[k]) / 2);
+
         if (this.author != null) {
             k++;
-            this.line[k] = "-" + this.author;
+            this.line[k] = this.author;
+            this.lineOffesets[k] = constOffeset - (this.getTextWidth(this.line[k]) / 2);
         }
     }
 

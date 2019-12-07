@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 require_once 'Mobile_Detect.php';
 
 
-class AccessLogger 
+class AccessLogger
 {
     private $sql;
     private $table;
@@ -17,17 +17,17 @@ class AccessLogger
     public $Detect;
     public $Headers;
     public $Geolocation;
-    public $UserAgent;    
-    
+    public $UserAgent;
+
     // The table is needed because each page has its own
     // instead of one enormous one with all pages
     function __construct ($table) {
         // Database connection
         require_once 'login.php';
-        $this->sql = new mysqli($hostName, $userName, $passWord, $dataBase);        
+        $this->sql = new mysqli($hostName, $userName, $passWord, $dataBase);
         if ($this->sql->connect_error) {
             die($this->sql->connect_error);
-        }        
+        }
         $this->table = $table;
         $this->apiKey = $apiKey;
     }
@@ -37,9 +37,9 @@ class AccessLogger
         $this->Detect = new Mobile_Detect;
         $device = "";
         // First load the page
-        if($this->Detect->isMobile() && !$this->Detect->isTablet()){            
+        if($this->Detect->isMobile() && !$this->Detect->isTablet()) {
             $device = "mobile";
-        } else {            
+        } else {
             $device = "PC";
         }
         // Just check if tablet
@@ -53,13 +53,13 @@ class AccessLogger
         $this->UserAgent = preg_replace("/\'/", "\'", $this->Headers['User-Agent']);
 
         $geolocate = json_decode(file_get_contents("http://api.ipstack.com/$this->IP?access_key=$this->apiKey&output=json&legacy=1"), true);
-	if (isset($geolocate['country_name'])) {
-	     $this->Geolocation = preg_replace("/\'/", "\'",  $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city']);
-	} else {
-	     $this->Geolocation = '';
-	}
+        if (isset($geolocate['country_name'])) {
+            $this->Geolocation = preg_replace("/\'/", "\'",  $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city']);
+        } else {
+            $this->Geolocation = '';
+        }
 
-        $query = "INSERT INTO $this->table VALUES(NULL, NULL, '$this->IP', '$device', '$this->Geolocation', '$this->UserAgent')";        
+        $query = "INSERT INTO $this->table VALUES(NULL, NULL, '$this->IP', '$device', '$this->Geolocation', '$this->UserAgent')";
         if (!$this->sql->query($query)) {
             echo "Could not insert into database: " . $this->sql->error;
         }

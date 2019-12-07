@@ -3,11 +3,11 @@
  */
 
 class staticSentence extends sentence {
-    constructor(canvas, X, Y) {
+    constructor(canvas, Y) {
         // Base constructor call
         super(canvas);
         // Variables specific of this type of sentence
-        this.X = X;
+        this.X = null;
         this.Yoriginal = Y; // Drawing start position to have the sentence centered on Y
         this.time;
         this.interval;
@@ -21,7 +21,7 @@ class staticSentence extends sentence {
     draw(deltaT) {
         var elapsed = (new Date).getTime() - this.time;
 
-        this.fade = (elapsed < this.interval * 0.7) ? true : false;
+        this.fade = (elapsed < this.interval * 0.8) ? true : false;
         /*
             If time is elapsed,
             Not if already requested.
@@ -37,8 +37,8 @@ class staticSentence extends sentence {
     createNew() {
         // Creation and expiration times
         this.time = (new Date).getTime();
-        this.interval = 4000 + Math.random() * 2000;
-        
+        this.interval = 10000; // + Math.random() * 2000;
+
         // Split into lines
         super.createNew();
 

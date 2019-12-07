@@ -16,7 +16,7 @@ class fallingSentence extends sentence {
 
     draw(deltaT) {
         this.fade = this.Y < this.endingY ? true : false;
-        // Advance sentence fall 
+        // Advance sentence fall
         this.Y += this.speed * deltaT;
         /*
             If Y position is under the window size, request a new sentence.
@@ -31,12 +31,12 @@ class fallingSentence extends sentence {
 
     // Compute all the parameters from the sentence we just got
     createNew() {
-        // Smaller size as the lenght increases       
+        // Smaller size as the lenght increases
         this.size = Math.floor(400 / (this.sentence.length + 5) + 10);
         this.offesetAmount = Math.round(this.size + (this.size / 3));
         // Random orizontal position
         this.X = Math.floor((Math.random() * (this.canvasWidth - this.canvasWidth / 5)));
-        // Slower with longer sentences                
+        // Slower with longer sentences
         this.speed = (1 / this.sentence.length) + 0.01;
         // Vertical (Y) position
         this.Y = Math.floor(Math.random() * this.canvasHeight / 4); // Appear in first quarte of screen

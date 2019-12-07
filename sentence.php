@@ -11,7 +11,9 @@ $sql->query('SET NAMES utf8');
 
 // Getting seed from client
 $seed = isset($_POST['seed']) ? $_POST['seed'] : null;
-if ($seed == null) {die("NULL seed");}
+if ($seed == null) {
+    die("NULL seed");
+}
 if (filter_var($seed, FILTER_VALIDATE_INT) === false) {
     die("Invalid seed integer");
 }
@@ -34,13 +36,13 @@ if (!$result = $sql->query($query)) {
 $fetched = $result->fetch_row();
 if ($fetched[1] != null) {
     $response = array(
-        'sentence' => $fetched[0],
-        'author' => $fetched[1],
-    );
+                    'sentence' => $fetched[0],
+                    'author' => $fetched[1],
+                );
 } else {
     $response = array(
-        'sentence' => $fetched[0],
-    );
+                    'sentence' => $fetched[0],
+                );
 }
 echo json_encode($response); // Sending senstence to client
 
@@ -51,7 +53,7 @@ $format = $now->format('Y-m-d H') . ":00:00";
 
 // Insert only if key is not present, otherwise update
 $query = "INSERT INTO vabbuo.statistics VALUES('$format', 1)
-				ON DUPLICATE KEY UPDATE requests = requests + 1;";
+         ON DUPLICATE KEY UPDATE requests = requests + 1; ";
 if (!$sql->query($query)) {
     die("Could not insert into database: " . $sql->error);
 }
