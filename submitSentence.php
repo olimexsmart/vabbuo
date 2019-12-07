@@ -36,8 +36,11 @@ if ($detect->isTablet()) {
     $device = "tablet";
 }
 
-$geolocate = json_decode(file_get_contents('http://freegeoip.net/json/' . $ip), true);
-$geolocation = preg_replace("/\'/", "\'",  $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city']);
+$geolocate = json_decode(file_get_contents("http://api.ipstack.com/$ip?access_key=$apiKey&output=json&legacy=1"), true);
+$geolocation = "";
+if (isset($geolocate['country_name'])) {
+    $geolocation = preg_replace("/\'/", "\'",  $geolocate['country_name'] . ', ' . $geolocate['region_name'] . ', ' . $geolocate['city']);
+}
 
 $query = "INSERT INTO newsentences VALUES(NULL, NULL, '$ip', '$device', '$geolocation', '$nickname', '$sentence', '$email', '$sex', '$contact', '$other')";
 

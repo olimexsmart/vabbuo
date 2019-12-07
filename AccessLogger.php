@@ -49,7 +49,7 @@ class AccessLogger
 
 
         $this->IP = $_SERVER['REMOTE_ADDR'];
-        $this->Headers = apache_request_Headers();
+        $this->Headers = apache_request_headers();
         $this->UserAgent = preg_replace("/\'/", "\'", $this->Headers['User-Agent']);
 
         $geolocate = json_decode(file_get_contents("http://api.ipstack.com/$this->IP?access_key=$this->apiKey&output=json&legacy=1"), true);
@@ -59,7 +59,7 @@ class AccessLogger
             $this->Geolocation = '';
         }
 
-        $query = "INSERT INTO $this->table VALUES(NULL, NULL, '$this->IP', '$device', '$this->Geolocation', '$this->UserAgent')";
+        $query = "INSERT INTO `$this->table` VALUES(NULL, NULL, '$this->IP', '$device', '$this->Geolocation', '$this->UserAgent')";
         if (!$this->sql->query($query)) {
             echo "Could not insert into database: " . $this->sql->error;
         }
@@ -67,3 +67,4 @@ class AccessLogger
         $this->sql->close();
     }
 }
+?>
