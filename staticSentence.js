@@ -1,5 +1,5 @@
 /*
- * REference: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations
+ * Reference: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations
  */
 
 class staticSentence extends sentence {
