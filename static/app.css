@@ -1,0 +1,63 @@
+html,
+body {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.landing-page {
+    overflow: hidden;
+}
+
+#sentence-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.landing-button {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#svgButton {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+.submission-page {
+    background: hsl(120, 55%, 30%);
+}
+
+.submission-shell {
+    max-width: 900px;
+}
+
+.intro-block {
+    max-width: 860px;
+}
+
+.submission-form .col-form-label {
+    padding-top: 0;
+}
+
+@media (max-width: 576px) {
+    .btn-group.flex-wrap > .btn {
+        margin-bottom: 0.5rem;
+    }
+}
+

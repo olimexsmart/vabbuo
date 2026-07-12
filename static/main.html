@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Eh vabbuò</title>
+  <!-- Bootstrap 5 removes the jQuery dependency and keeps the form layout simple. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/app.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="/static/main.js"></script>
+</head>
+<body class="submission-page">
+  <main class="container py-4 submission-shell">
+    <!-- The top block keeps the old tone, but the layout is cleaner and flatter. -->
+    <section class="intro-block border rounded-2 bg-body p-4 mb-4">
+      <h1 class="h4 mb-3">Bomber, inserisci un po' una frase!</h1>
+      <p class="mb-3">
+        Non sentirti in ansia, inserisci solo quello che vuoi. Puoi anche lasciare
+        tutto vuoto e cliccare solo per dirmi che sei passato.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="/" class="btn btn-success">Torna a Vabbuò</a>
+        <a href="https://olimexsmart.it" class="btn btn-danger" rel="noreferrer">Olimexsmart</a>
+        <button class="btn btn-info" id="why" type="button">Si ma perché?</button>
+      </div>
+    </section>
+
+    <form id="newsentence" method="post" class="submission-form">
+      <div class="row g-3">
+        <div class="col-12 col-md-3">
+          <label for="nickname" class="col-form-label fw-bold">Nickname</label>
+        </div>
+        <div class="col-12 col-md-9">
+          <input type="text" class="form-control" name="nickname" id="nickname" placeholder="Nickname" data-bs-toggle="tooltip" title="Dimmi chi non sei">
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label for="sentence" class="col-form-label fw-bold">Frase</label>
+        </div>
+        <div class="col-12 col-md-9">
+          <textarea class="form-control" name="sentence" id="sentence" placeholder="Scrivi o copia la tua frase qui" rows="5" data-bs-toggle="tooltip" title="Meglio in italiano ma vabbuò"></textarea>
+        </div>
+
+        <div class="col-12 col-md-3">
+          <span class="col-form-label fw-bold">Sesso</span>
+        </div>
+        <div class="col-12 col-md-9">
+          <div class="btn-group flex-wrap" role="group" aria-label="Sesso">
+            <input class="btn-check" type="radio" name="sex" id="radio1" value="uomo" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="radio1">Uomo</label>
+
+            <input class="btn-check" type="radio" name="sex" id="radio2" value="donna" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="radio2">Donna</label>
+
+            <input class="btn-check" type="radio" name="sex" id="radio3" value="misto" autocomplete="off" checked>
+            <label class="btn btn-outline-secondary" for="radio3">Misto</label>
+
+            <input class="btn-check" type="radio" name="sex" id="radio4" value="tanto" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="radio4" data-bs-toggle="tooltip" title="Ahahaha">Tanto</label>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label for="other" class="col-form-label fw-bold">Commento</label>
+        </div>
+        <div class="col-12 col-md-9">
+          <textarea class="form-control" name="other" id="other" placeholder="Se volessi anche solo scrivere un commento" rows="2" data-bs-toggle="tooltip" title="Non essere cattivo che piango poi"></textarea>
+        </div>
+
+        <div class="col-12 col-md-3">
+          <span class="col-form-label fw-bold">Marpione</span>
+        </div>
+        <div class="col-12 col-md-9">
+          <div class="form-check mt-2">
+            <input class="form-check-input" type="checkbox" name="marpione" id="marpione" value="marpione">
+            <label class="form-check-label" for="marpione">Scrivimi per sapere come sto</label>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3" id="emailLabel">
+          <label for="email" class="col-form-label fw-bold">Email</label>
+        </div>
+        <div class="col-12 col-md-9" id="emailGroup">
+          <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-bs-toggle="tooltip" title="Quella che usi per lo spam">
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-success btn-lg w-100" id="submit" data-bs-toggle="tooltip" title="Che figo Bootstrap">Vabbuò dai invia</button>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <!-- Success modal: the frontend opens it after each successful submission. -->
+  <div class="modal fade" id="thanks" tabindex="-1" aria-labelledby="thanksLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="thanksLabel">Come farei senza di te</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Grazie caro! Se vuoi ne puoi pure inviare un'altra lì così zan zan.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Prego!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The explanatory modal keeps the old spirit, but the implementation is native Bootstrap 5. -->
+  <div class="modal fade" id="whyModal" tabindex="-1" aria-labelledby="whyModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="whyModalTitle">Cioè tipo frè</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Insomma perché no? Alla fine che importanza ha?</p>
+          <p>Vabbuò è uno spirito di vita dove non ci si da troppa importanza.</p>
+          <p>Vabbuò perché essere pieni di noi stessi non ci condurrà ad una vita felice.</p>
+          <p>Vabbuò noi possiamo anche essere indifferenti agli altri, ma gli altri non devono essere indifferenti a noi.</p>
+          <p>Semplicemente accogliamo ogni istante, con ogni felicità e rammarico che esso porta.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="https://olimexsmart.it" class="btn btn-danger" rel="noreferrer">Olimexsmart</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi va</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

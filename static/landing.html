@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Eh vabbuò</title>
+  <!-- Bootstrap is kept only for the few UI primitives that still benefit from it. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/app.css">
+  <script type="module" src="/static/landing.js"></script>
+</head>
+<body class="landing-page">
+  <canvas id="sentence-canvas" aria-hidden="true"></canvas>
+
+  <!-- The central button stays visually close to the original site. -->
+  <a class="landing-button" href="/main.php" aria-label="Apri il modulo di invio">
+    <svg width="100" height="100" id="svgButton" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="40" fill="yellow" id="outer"></circle>
+      <circle cx="50" cy="50" r="30" fill="green" id="inner"></circle>
+    </svg>
+  </a>
+</body>
+</html>
+
