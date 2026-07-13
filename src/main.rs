@@ -20,22 +20,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let app = axum::Router::new()
         // Compatibility routes keep the old public URLs working.
         .route("/", get(handlers::landing_page))
-        .route("/index.php", get(handlers::landing_page))
-        .route("/start.html", get(handlers::landing_page))
-        .route("/mobileStart.html", get(handlers::landing_page))
+        .route("/index.html", get(handlers::landing_page))
         .route("/main", get(handlers::main_page))
-        .route("/main.php", get(handlers::main_page))
         .route("/main.html", get(handlers::main_page))
         .route(
             "/api/sentence",
             get(handlers::sentence_endpoint).post(handlers::sentence_endpoint_post),
         )
-        .route(
-            "/sentence.php",
-            get(handlers::sentence_endpoint).post(handlers::sentence_endpoint_post),
-        )
         .route("/api/submit", post(handlers::submit_endpoint))
-        .route("/submitSentence.php", post(handlers::submit_endpoint))
         // Static browser assets live under /static so the HTML can stay simple.
         .nest_service("/static", ServeDir::new("static"))
         // The old favicon still works without forcing it into the static mount.

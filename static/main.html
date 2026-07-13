@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Eh vabbuò</title>
-  <!-- Bootstrap 5 removes the jQuery dependency and keeps the form layout simple. -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/app.css">
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
@@ -46,18 +45,18 @@
           <span class="col-form-label fw-bold">Sesso</span>
         </div>
         <div class="col-12 col-md-9">
-          <div class="btn-group flex-wrap" role="group" aria-label="Sesso">
+          <div class="btn-group flex-wrap" role="group" >
             <input class="btn-check" type="radio" name="sex" id="radio1" value="uomo" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="radio1">Uomo</label>
+            <label class="btn btn-secondary" for="radio1">Uomo</label>
 
             <input class="btn-check" type="radio" name="sex" id="radio2" value="donna" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="radio2">Donna</label>
+            <label class="btn btn-secondary" for="radio2">Donna</label>
 
             <input class="btn-check" type="radio" name="sex" id="radio3" value="misto" autocomplete="off" checked>
-            <label class="btn btn-outline-secondary" for="radio3">Misto</label>
+            <label class="btn btn-secondary" for="radio3">Misto</label>
 
             <input class="btn-check" type="radio" name="sex" id="radio4" value="tanto" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="radio4" data-bs-toggle="tooltip" title="Ahahaha">Tanto</label>
+            <label class="btn btn-secondary" for="radio4" data-bs-toggle="tooltip" title="Ahahaha">Tanto</label>
           </div>
         </div>
 
@@ -93,12 +92,12 @@
   </main>
 
   <!-- Success modal: the frontend opens it after each successful submission. -->
-  <div class="modal fade" id="thanks" tabindex="-1" aria-labelledby="thanksLabel" aria-hidden="true">
+  <div class="modal fade" id="thanks" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title fs-5" id="thanksLabel">Come farei senza di te</h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           Grazie caro! Se vuoi ne puoi pure inviare un'altra lì così zan zan.
@@ -111,12 +110,12 @@
   </div>
 
   <!-- The explanatory modal keeps the old spirit, but the implementation is native Bootstrap 5. -->
-  <div class="modal fade" id="whyModal" tabindex="-1" aria-labelledby="whyModalTitle" aria-hidden="true">
+  <div class="modal fade" id="whyModal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title fs-5" id="whyModalTitle">Cioè tipo frè</h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           <p>Insomma perché no? Alla fine che importanza ha?</p>

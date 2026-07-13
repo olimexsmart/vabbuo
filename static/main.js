@@ -1,9 +1,5 @@
 // Submission page controller.
-//
-// This module handles three jobs:
-// - initialize Bootstrap tooltips on non-touch devices,
-// - show and hide the contact email field,
-// - submit the form with fetch instead of jQuery.ajax.
+
 
 const form = document.getElementById("newsentence");
 const emailLabel = document.getElementById("emailLabel");
@@ -48,7 +44,7 @@ form.addEventListener("submit", async (event) => {
     const payload = new URLSearchParams(new FormData(form));
 
     try {
-        await fetch("/submitSentence.php", {
+        await fetch("/api/submit", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",

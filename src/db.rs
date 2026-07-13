@@ -3,9 +3,6 @@ use sqlx::{Row, SqlitePool};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// Fallback content so the site still works on a brand new SQLite file.
-///
-/// The original app depended on an imported MySQL dump. The rewrite keeps the
-/// experience alive even when that historical dataset is unavailable.
 const DEFAULT_SENTENCES: &[(&str, Option<&str>)] = &[
     ("Vabbuò, oggi si va avanti così.", None),
     ("Lascia stare, va bene così.", None),
@@ -18,10 +15,6 @@ const DEFAULT_SENTENCES: &[(&str, Option<&str>)] = &[
 ];
 
 /// Initialize the database schema and seed it if necessary.
-///
-/// The schema is intentionally smaller than the legacy MySQL dump: we keep the
-/// sentence pool and the submission table, but we drop the personal logging and
-/// geolocation tables from the active code path.
 pub async fn initialize(pool: &SqlitePool) -> Result<(), sqlx::Error> {
     // SQLite is tiny, but enabling foreign keys keeps future changes honest.
     sqlx::query("PRAGMA foreign_keys = ON;")
@@ -85,9 +78,6 @@ async fn seed_sentences(pool: &SqlitePool) -> Result<(), sqlx::Error> {
 }
 
 /// Resolve a user seed into a stable offset.
-///
-/// The modulo logic mirrors the original app, but we operate on offsets rather
-/// than contiguous IDs so deletions do not break sentence selection.
 pub fn seed_to_offset(seed: u64, count: i64) -> i64 {
     if count <= 0 {
         return 0;
